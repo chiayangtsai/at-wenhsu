@@ -1,26 +1,22 @@
 # windows
 
-def leetcode_fin_max():
-    #Q: find the maximum value in a given list "a"
-    a = [3, 6, -1, 7, 5, 4]
-
-    max_value = a[0]
-    for x in a:
-        if x > max_value:
-            max_value = x
-    print(max_value)
-
-    return
+from basics import basic_print_usage
+from basics import leetcode_find_max
+from basics import basic_list_i
 
 
 if __name__ == '__main__':  # special meaning for Python execution, but we will talk about it later.
-    testID = 9
+    
+    testID = 2
+    
     if testID == 0:
         print("hello World")
     elif testID == 1:
-        pass # print
+        basic_print_usage() #print
     elif testID == 2:
-        leetcode_fin_max()
+        basic_list_i() #list_i
+    elif testID == 3:
+        leetcode_find_max()
     else:
         print("Not a supported testID = %d" % (testID)  )
 
@@ -28,10 +24,7 @@ if __name__ == '__main__':  # special meaning for Python execution, but we will 
 '''
 ------- baseic level -------
 Part 1/3 - basics
-- if-else logic / and / or <===
-- print() usage
-- list_i() : basic operation, combine, +=
-- loop : for, while (go through)
+- loop : for, while (go through) <====
 - find min/max, in-place  <===
 - bubble sort 
 - shuffle, merge two sorted list

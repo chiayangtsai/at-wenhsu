@@ -1,3 +1,83 @@
+def basic_for_loop():
+
+    a =  [3, 1, 5, 4, 2]
+    #     0  1  2  3  4 <== len(a)-1
+
+    #Q: print out the elements one by one in a
+    for x in a:
+        print(x)
+
+    #Q: print out the elements one by one in a
+    for i in [0, 1, 2, 3, 4]:
+        print(a[i])
+    print("------------")
+    a= [3, 1, 5, 4, 2]
+    #   0  1  2  3  4 
+    #Q: Reset all elements to -1
+    # a = [-1, -1, -1, -1, -1]
+    for i in [0,1,2,3,4]:
+        a[i]=-1
+    print(a)
+
+
+    #Q: Give a list a, find the maximum value.
+    a= [5, 1, 4, 2, 7, 5]
+    #NOTE : size of a is fixed number 6
+    max_value=a[0]
+    for x in a:
+        if max_value<x:
+            max_value=x
+    print(max_value)
+
+    #Q: sum up all eleemnts in a, and print out the sum value
+    a = [-1, 3, 0, 2, 5]
+    sum=0
+    for x in a:
+        sum=sum+x
+    print(sum)
+        
+    sum = 0
+    for i in [0, 1, 2, 3, 4]:
+        sum=sum+a[i]
+    print(sum)
+
+    #Q: Give a list a, find the minimum value.
+    a = [-1, 3, 0, 2, 5]
+    min_value=a[0]
+    for x in a:
+        if x< min_value:
+            min_value=x  
+    print(min_value)
+    
+    #Q: Give a list a, find the minimum value., use index to access the list
+    a = [-1, 3, 0, 2, 5]
+    
+    min_value=a[0]
+    for i in [0,1,2,3,4]:
+        if a[i] < min_value:
+            min_value=a[i]  
+    print(min_value)
+    
+def basic_range_usage():
+    '''
+    [3, 4, 5, 6, 7]  <== range( 3 , 8 , 1 )
+    [4, 5, 6, 7] <== range( 4, 8, 1)
+    [0, 1, 2, 3, 4]  <== range( 0, 5, 1)
+
+    range( starting integer boundary , ending integer boundary  , step )
+           ^^^^^^^^^^^^^^^^^^^^^^^^^   ^^^^^^^^^^^^^^^^^^^^^^^
+              inclusive                     exclusive    
+    
+    '''
+
+    #!Q: [3, 4, 5, 6, 7]
+    res = range(3, 8, 1)
+    print(res)
+    
+    
+    return 
+
+
 def basic_list_i():
     # ------ combine ------
     # Q: Give two lists a and b, combine a and b to c
@@ -33,7 +113,7 @@ def basic_list_i():
 
     print("------- append meaning ----")
     # Q: append x to a => [3, 1, -1]
-    a = [3, 1]
+    a = [3, 1] #a[0]= 0, a[1]= 1 <== mutable
     x = -1
     a = a + [x] # 拆掉重蓋
     print(a)
@@ -44,6 +124,11 @@ def basic_list_i():
     print(a)
 
 
+    print("-------- immutable variable: int, floating, string--")
+    a = 5
+    a = a +1
+
+    a += 1
     
     return
 

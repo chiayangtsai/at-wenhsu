@@ -5,6 +5,8 @@ from basics import leetcode_find_max
 from basics import basic_list_i
 from basics import basic_for_loop
 from basics import basic_range_usage
+from basics import leetcode_shuffle_two_lists
+
 
 if __name__ == '__main__':  # special meaning for Python execution, but we will talk about it later.
     
@@ -22,6 +24,8 @@ if __name__ == '__main__':  # special meaning for Python execution, but we will 
         leetcode_find_max()
     elif testID == 6:
         basic_range_usage() #range
+    elif testID == 7:
+        leetcode_shuffle_two_lists()
     else:
         print("Not a supported testID = %d" % (testID)  )
 

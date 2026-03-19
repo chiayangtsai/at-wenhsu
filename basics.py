@@ -67,16 +67,83 @@ def basic_range_usage():
     range( starting integer boundary , ending integer boundary  , step )
            ^^^^^^^^^^^^^^^^^^^^^^^^^   ^^^^^^^^^^^^^^^^^^^^^^^
               inclusive                     exclusive    
+    range( starting integer boundary , ending integer boundary)
+     = range( starting integer boundary , ending integer boundary  , 1)
+
+    range( ending integer boundary)
+     = range( 0 , ending integer boundary  , 1)
+
+
     
     '''
-
+    tmp = [3, 1]
+    a = list(tmp) # [] <=== deep copy
+    print(a)
+    
     #!Q: [3, 4, 5, 6, 7]
     res = range(3, 8, 1)
     print(res)
+    res = list(res)
+    print(res)
+
+    #Q: [6, 7, 8]
+    res = range(6,9,1)
+    res = range(6,9)
+    print(list(res))
     
+    #Q: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    res = range(0,10,1)
+    print(list(res))
+    
+
+    #Q: [2, 4, 6, 8, 10]
+    res = range(2,11,2)
+    print(list(res))
+
+
+    #Q: [7, 6, 5, 4, 3]
+    res = range( 7 , 2, -1 )
+    print(list(res))
+
+
+
+    #Q: [5, 4, 3, 2, 1, 0]
+    res = range( 5 , -1, -1 )
+    print(list(res))
+
+
+    #Q: Give a, print out the "list of indexes"
+    a = [3, 1, 5, 4, 2, 9, 8]
+    #    0  1  2  3  4  5  6  
+    # => [0, ..........., len(a)-1]
+    res = range(  0 ,  len(a)  , 1  ) # range(len(a))
+    print(list(res))
+
+
     
     return 
 
+
+def leetcode_shuffle_two_lists():
+    #Q: Given two lists, a and b, please shuffle a and b to c, following index order
+    # NOTE: len(a) and len(b) are the same
+    a= [3, 5, 1, 4]
+    b= [9, 6, 1, 0]
+    c= []
+    # => c=[3, 9, 5, 6, 1, 1, 4, 0]
+
+    #HW0318
+
+    print("------- v1 ---------")
+    #Q: Given two lists, a and b, please shuffle a and b to c, following index order
+    a= [3, 5, 1, 4]
+    b= [9, 6, 1, 0, 8, -1]
+    c= []
+    # => c=[3, 9, 5, 6, 1, 1, 4, 0, 8, -1]
+
+    #HW0318 (bonus)
+    
+    return
 
 def basic_list_i():
     # ------ combine ------

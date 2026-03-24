@@ -1,72 +1,107 @@
-def basic_for_loop():
+def basic_while_loop():
+    """
+    for : very useful to "one container" loop structure
+        for x in [.....]  : stop when all elements were iterated
 
-    a =  [3, 1, 5, 4, 2]
+    while : general purpose loop structure
+        while "satisfied condition" :
+            ....
+
+    """
+    data = [3, 1, 5, 4, 2]
+    # Q: print out the elements in data one-by-one
+    for x in data:
+        print(x)
+
+    print("----")
+
+    i = 0
+    while i < len(data):  # i is 5 < 5
+        print(data[i])  # data[9], data[1], data[2]....data[4]
+        i = i + 1  # i => 5
+    print("----")
+
+    # Q: find the maximum of the list "nums", use "while"
+    nums = [3, 1, 5, 4, 2]
+    i = 0
+    max_value = nums[0]
+    while i < len(nums):
+        if nums[i] > max_value:
+            max_value = nums[i]
+        i = i + 1
+    print(max_value)
+
+    return
+
+
+def basic_for_loop():
+    a = [3, 1, 5, 4, 2]
     #     0  1  2  3  4 <== len(a)-1
 
-    #Q: print out the elements one by one in a
+    # Q: print out the elements one by one in a
     for x in a:
         print(x)
 
-    #Q: print out the elements one by one in a
+    # Q: print out the elements one by one in a
     for i in [0, 1, 2, 3, 4]:
         print(a[i])
     print("------------")
-    a= [3, 1, 5, 4, 2]
-    #   0  1  2  3  4 
-    #Q: Reset all elements to -1
+    a = [3, 1, 5, 4, 2]
+    #   0  1  2  3  4
+    # Q: Reset all elements to -1
     # a = [-1, -1, -1, -1, -1]
-    for i in [0,1,2,3,4]:
-        a[i]=-1
+    for i in [0, 1, 2, 3, 4]:
+        a[i] = -1
     print(a)
 
-
-    #Q: Give a list a, find the maximum value.
-    a= [5, 1, 4, 2, 7, 5]
-    #NOTE : size of a is fixed number 6
-    max_value=a[0]
+    # Q: Give a list a, find the maximum value.
+    a = [5, 1, 4, 2, 7, 5]
+    # NOTE : size of a is fixed number 6
+    max_value = a[0]
     for x in a:
-        if max_value<x:
-            max_value=x
+        if max_value < x:
+            max_value = x
     print(max_value)
 
-    #Q: sum up all eleemnts in a, and print out the sum value
+    # Q: sum up all eleemnts in a, and print out the sum value
     a = [-1, 3, 0, 2, 5]
-    sum=0
-    for x in a:
-        sum=sum+x
-    print(sum)
-        
     sum = 0
-    for i in [0, 1, 2, 3, 4]:
-        sum=sum+a[i]
+    for x in a:
+        sum = sum + x
     print(sum)
 
-    #Q: Give a list a, find the minimum value.
+    sum = 0
+    for i in range(0, len(a), 1):
+        sum = sum + a[i]
+    print(sum)
+
+    # Q: Give a list a, find the minimum value.
     a = [-1, 3, 0, 2, 5]
-    min_value=a[0]
+    min_value = a[0]
     for x in a:
-        if x< min_value:
-            min_value=x  
+        if x < min_value:
+            min_value = x
     print(min_value)
-    
-    #Q: Give a list a, find the minimum value., use index to access the list
+
+    # Q: Give a list a, find the minimum value., use index to access the list
     a = [-1, 3, 0, 2, 5]
-    
-    min_value=a[0]
-    for i in [0,1,2,3,4]:
+
+    min_value = a[0]
+    for i in [0, 1, 2, 3, 4]:
         if a[i] < min_value:
-            min_value=a[i]  
+            min_value = a[i]
     print(min_value)
-    
+
+
 def basic_range_usage():
-    '''
+    """
     [3, 4, 5, 6, 7]  <== range( 3 , 8 , 1 )
     [4, 5, 6, 7] <== range( 4, 8, 1)
     [0, 1, 2, 3, 4]  <== range( 0, 5, 1)
 
     range( starting integer boundary , ending integer boundary  , step )
            ^^^^^^^^^^^^^^^^^^^^^^^^^   ^^^^^^^^^^^^^^^^^^^^^^^
-              inclusive                     exclusive    
+              inclusive                     exclusive
     range( starting integer boundary , ending integer boundary)
      = range( starting integer boundary , ending integer boundary  , 1)
 
@@ -74,76 +109,118 @@ def basic_range_usage():
      = range( 0 , ending integer boundary  , 1)
 
 
-    
-    '''
+
+    """
     tmp = [3, 1]
-    a = list(tmp) # [] <=== deep copy
+    a = list(tmp)  # [] <=== deep copy
     print(a)
-    
+
     #!Q: [3, 4, 5, 6, 7]
     res = range(3, 8, 1)
     print(res)
     res = list(res)
     print(res)
 
-    #Q: [6, 7, 8]
-    res = range(6,9,1)
-    res = range(6,9)
-    print(list(res))
-    
-    #Q: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-    res = range(0,10,1)
-    print(list(res))
-    
-
-    #Q: [2, 4, 6, 8, 10]
-    res = range(2,11,2)
+    # Q: [6, 7, 8]
+    res = range(6, 9, 1)
+    res = range(6, 9)
     print(list(res))
 
-
-    #Q: [7, 6, 5, 4, 3]
-    res = range( 7 , 2, -1 )
+    # Q: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    res = range(0, 10, 1)
     print(list(res))
 
-
-
-    #Q: [5, 4, 3, 2, 1, 0]
-    res = range( 5 , -1, -1 )
+    # Q: [2, 4, 6, 8, 10]
+    res = range(2, 11, 2)
     print(list(res))
 
+    # Q: [7, 6, 5, 4, 3]
+    res = range(7, 2, -1)
+    print(list(res))
 
-    #Q: Give a, print out the "list of indexes"
+    # Q: [5, 4, 3, 2, 1, 0]
+    res = range(5, -1, -1)
+    print(list(res))
+
+    # Q: Give a, print out the "list of indexes"
     a = [3, 1, 5, 4, 2, 9, 8]
-    #    0  1  2  3  4  5  6  
+    #    0  1  2  3  4  5  6
     # => [0, ..........., len(a)-1]
-    res = range(  0 ,  len(a)  , 1  ) # range(len(a))
+    res = range(0, len(a), 1)  # range(len(a))
     print(list(res))
 
-
-    
-    return 
+    return
 
 
 def leetcode_shuffle_two_lists():
-    #Q: Given two lists, a and b, please shuffle a and b to c, following index order
-    # NOTE: len(a) and len(b) are the same
-    a= [3, 5, 1, 4]
-    b= [9, 6, 1, 0]
-    c= []
-    # => c=[3, 9, 5, 6, 1, 1, 4, 0]
+    """
 
-    #HW0318
+    a = a+ [-1] #拆掉重蓋
+    a += [-1] #加蓋
+
+    len(a) <== length of list a
+    len(a) == 0 <== a is an empty list
+
+    """
+
+    # Q: Given two lists, a and b, please shuffle a and b to c, following index order
+    # NOTE: len(a) and len(b) are the same
+    a = [3, 5, 1, 4]
+    b = [9, 6, 1, 0]
+    # => c=[3, 9, 5, 6, 1, 1, 4, 0]
+    c = []
+    for i in range(0, len(a), 1):  # [0, 1, 2....., len(a)-1]
+        c += [a[i]]
+        c += [b[i]]
+
+    print(c)
+    # HW0318
+
+    print("------- v 0.1 ----- while--")
+    a = [3, 5, 1, 4]
+    b = [9, 6, 1, 0]
+    # => c=[3, 9, 5, 6, 1, 1, 4, 0]
+    c = []
+
+    i = 0
+    while i < len(a):
+        c += [a[i]]
+        c += [b[i]]
+        i = i + 1
+    print(c)
 
     print("------- v1 ---------")
-    #Q: Given two lists, a and b, please shuffle a and b to c, following index order
-    a= [3, 5, 1, 4]
-    b= [9, 6, 1, 0, 8, -1]
-    c= []
+    # Q: Given two lists, a and b, please shuffle a and b to c, following index order
+    # NOTE: len(a) and len(b) may not be the same.
+    a = [3, 5, 1, 4]
+    b = [9, 6, 1, 0, 8, -1]
+    c = []
     # => c=[3, 9, 5, 6, 1, 1, 4, 0, 8, -1]
-
-    #HW0318 (bonus)
+    i = 0
+    while i < len(a) :
+        c += [a[i]]
+        c += [b[i]]
+        i = i + 1
+    while i<len(b):
+        c+=[b[i]]
+        i=i+1
+    print(c)
+    print("------- v1.1 ---------")
     
+    c=[]
+    for i in range(0,len(a),1):
+        c+=[a[i]]
+        c+=[b[i]]
+    print(c)
+    print("------- v1.2 ---------")
+
+    
+    
+    # HW0322 : use len(a) and len(b)
+    #          "for" works but you could try "while"
+
     return
+
 
 def basic_list_i():
     # ------ combine ------
@@ -162,55 +239,62 @@ def basic_list_i():
     a += [x]
 
     # ---- basic characteristics -----
-    a= [7, 6] #< a is the memory address
+    a = [7, 6]  # < a is the memory address
     #   ^  ^  <== two memory "blocks"
 
     a = [3, 5, 1, 4, 2]
     #    0  1  2  3   4
     #    -5 -4  -3 -2 -1
     #                 -6 <== (X)
-    
-    #Q: print out the length of a
-    print( len(a) )
 
-    #Q: print out the last element in a
+    # Q: print out the length of a
+    print(len(a))
+
+    # Q: print out the last element in a
     print(a[-1])
-
-
 
     print("------- append meaning ----")
     # Q: append x to a => [3, 1, -1]
-    a = [3, 1] #a[0]= 0, a[1]= 1 <== mutable
+    a = [3, 1]  # a[0]= 0, a[1]= 1 <== mutable
     x = -1
-    a = a + [x] # 拆掉重蓋
+    a = a + [x]  # 拆掉重蓋
     print(a)
 
     a = [3, 1]
     x = -1
-    a += [x] #加蓋
+    a += [x]  # 加蓋
     print(a)
-
 
     print("-------- immutable variable: int, floating, string--")
     a = 5
-    a = a +1
+    a = a + 1
 
     a += 1
-    
+
     return
 
 
 def leetcode_find_max():
     # Q: find the maximum value in a given list "a"
     a = [3, 6, -1, 7, 5, 4]
-
-    max_value = a[0]
+    max_value = a[0]  # in-function global variable
     for x in a:
         if x > max_value:
             max_value = x
     print(max_value)
 
-    return
+    print("------ in-place memory usage ------")
+    """
+    No additional global memory is required during the operation/execution
+    """
+    a = [3, 6, -1, 7, 5, 4]
+    for x in a:
+        if x > a[0]:
+            a[0] = x
+    print(a[0])
+
+    print("------ bubble shifting -> bubble sort ------")
+    # HW0322(VK) : start from here
 
 
 def basic_print_usage():

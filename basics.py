@@ -151,6 +151,17 @@ def basic_range_usage():
 
     return
 
+def leetcode_merge_two_sorted_lists():
+    #Q: Given two sorted lists a and b, merge these two lists to c which is also sorted
+    a = [2, 3, 5, 6]
+    b = [0, 1, 4, 7, 8]
+    c = []
+    # c=> [0, 1, 2, 3, 4, 5, 6, 7, 8]
+    #HW0323
+
+    return 
+
+
 
 def leetcode_shuffle_two_lists():
     """
@@ -196,29 +207,77 @@ def leetcode_shuffle_two_lists():
     b = [9, 6, 1, 0, 8, -1]
     c = []
     # => c=[3, 9, 5, 6, 1, 1, 4, 0, 8, -1]
+    d = max(len(a), len(b))
+    e = min(len(a), len(b))
     i = 0
-    while i < len(a) :
+    # deal with shared index(es)
+    while i < e:
         c += [a[i]]
         c += [b[i]]
         i = i + 1
-    while i<len(b):
-        c+=[b[i]]
-        i=i+1
+
+    # deal with the remaining numbers in longer one
+
+    # while first -> if-else
+    # while i<d:
+    #     if len(a)>len(b):
+    #         c+=[a[i]]
+    #     else: # <= condition
+    #         c+=[b[i]]
+    #     i=i+1
+
+    # if-else -> while <== better performance
+    if len(a) > len(b):
+        while i < len(a):
+            c += [a[i]]
+            i += 1
+    else:
+        while i < len(b):
+            c += [b[i]]
+            i += 1
+
     print(c)
+
     print("------- v1.1 ---------")
-    
-    c=[]
-    for i in range(0,len(a),1):
-        c+=[a[i]]
-        c+=[b[i]]
+    """
+    True or True => True
+    True or False => True
+    False or True => True
+    False or False => False
+
+    True and True => True
+    True and False => False
+    False and True => False
+    False and False => False    
+    """
+    a = [3, 5, 1, 4]
+    b = [9, 6, 1, 0, 8, -1]
+    c = []
+
+    i = 0  # for counting a
+    j = 0  # for counting b
+    # or , and
+
+    while i < len(a) or j < len(b):
+        if i < len(a):
+            # take a
+            c += [a[i]]
+            i += 1
+
+        if j < len(b):
+            # take b
+            c += [b[j]]
+            j += 1
+
     print(c)
-    print("------- v1.2 ---------")
+
+    print("------- v2 ---------")
+    #.. list..
+
+    print("------- v3 ---------")
+    #.. list : complexity
 
     
-    
-    # HW0322 : use len(a) and len(b)
-    #          "for" works but you could try "while"
-
     return
 
 
@@ -292,9 +351,29 @@ def leetcode_find_max():
         if x > a[0]:
             a[0] = x
     print(a[0])
+    print("result = %s" % str(a) ) # <== rookie please use this expression
+    #print("result = %s" % a ) #<== python assume the variable is string type
 
-    print("------ bubble shifting -> bubble sort ------")
-    # HW0322(VK) : start from here
+    print("------ bubble shifting ------")
+    '''
+         0  1  2   3  4  5
+    a = [3, 6, -1, 7, 5, 4]
+         ^^^^^ index-0 vs index-1, compare, X
+            ^^^^^^ index-1 vs index-2, compare, swap
+         3  -1  6  7  5  4
+                ^^^^ index-2 vs index-3, compare, X
+                   ^^^^^ index-3 vs index-4, compare, swap
+         3  -1  6  5  7  4
+                      ^^^^^ index-4 vs index-5, compare, swap
+         3  -1  6  5  4  7 <== max
+
+    N = len(a)
+    k = [0, ..., N-2] # k is the left index of each pair (comparison)    
+
+    for k in range(0 , N-1, 1): #[0, ... N-2]
+    # HW0323(VK) : start from here next time. 
+    
+    '''
 
 
 def basic_print_usage():

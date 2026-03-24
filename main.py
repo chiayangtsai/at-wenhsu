@@ -7,10 +7,11 @@ from basics import basic_for_loop
 from basics import basic_range_usage
 from basics import leetcode_shuffle_two_lists
 from basics import basic_while_loop
+from basics import leetcode_merge_two_sorted_lists
 
 if __name__ == '__main__':  # special meaning for Python execution, but we will talk about it later.
     
-    testID = 6
+    testID = 8
     
     if testID == 0:
         print("hello World")
@@ -28,6 +29,8 @@ if __name__ == '__main__':  # special meaning for Python execution, but we will 
         basic_while_loop() #while 
     elif testID == 8:
         leetcode_find_max()
+    elif testID == 9:
+        leetcode_merge_two_sorted_lists()
     else:
         print("Not a supported testID = %d" % (testID)  )
 

@@ -151,16 +151,81 @@ def basic_range_usage():
 
     return
 
+
 def leetcode_merge_two_sorted_lists():
-    #Q: Given two sorted lists a and b, merge these two lists to c which is also sorted
+    print("------- v0 ---------")
+    # Q: Given two sorted lists a and b, merge these two lists to c which is also sorted
     a = [2, 3, 5, 6]
     b = [0, 1, 4, 7, 8]
     c = []
     # c=> [0, 1, 2, 3, 4, 5, 6, 7, 8]
-    #HW0323
+    # HW0323
+    i = 0
+    j = 0
+    while i < len(a) and j < len(b):
+        if a[i] < b[j]:
+            c += [a[i]]
+            i = i + 1
+        else:
+            c += [b[j]]
+            j = j + 1
+    while i < len(a):
+        c += [a[i]]
+        i = i + 1
+    while j < len(b):
+        c += [b[j]]
+        j = j + 1
+    print(c)
+    # b[0]<a[0]-->b[0]   []
+    # b[1]<a[0]-->b[1]
+    # a[0]<b[2]-->a[0]
+    # a[1]<b[2]-->a[1]
+    # b[2]<a[2]-->b[2]
+    # a[3]<b[3]-->a[3]
+    #
+    print("------- v1 ---------")
+    a = [2, 3, 5, 6]
+    b = [0, 1, 4, 7, 8]
+    c = []
+    # c=> [0, 1, 2, 3, 4, 5, 6, 7, 8]
+    i = 0
+    j = 0
+    while i < len(a) or j < len(b):
+        # ..
+        if i < len(a) and j < len(b):  # 兩個都有
+            if a[i] < b[j]:
+                c += [a[i]]
+                i = i + 1
+            else:
+                c += [b[j]]
+                j = j + 1
+        else:  # 其中一個沒有
+            if j == len(b):  # explicit
+                c += [a[i]]
+                i = i + 1
+            else:
+                c += [b[j]]
+                j = j + 1
+    print(c)
 
-    return 
-
+    print("------- v2 ---------")
+    a = [2, 3, 5, 6]
+    b = [0, 1, 4, 7, 8]
+    c = []
+    # c=> [0, 1, 2, 3, 4, 5, 6, 7, 8]
+    i = 0
+    j = 0
+    while i < len(a) or j < len(b):
+        # ..
+        if (i < len(a) and j < len(b) and a[i] < b[j]) or j == len(b):
+            c += [a[i]]
+            i = i + 1
+        else:
+            c += [b[j]]
+            j = j + 1
+    print(c)
+    print("------- v3 ---------")
+    # TBV
 
 
 def leetcode_shuffle_two_lists():
@@ -272,12 +337,11 @@ def leetcode_shuffle_two_lists():
     print(c)
 
     print("------- v2 ---------")
-    #.. list..
+    # .. list..
 
     print("------- v3 ---------")
-    #.. list : complexity
+    # .. list : complexity
 
-    
     return
 
 
@@ -351,11 +415,12 @@ def leetcode_find_max():
         if x > a[0]:
             a[0] = x
     print(a[0])
-    print("result = %s" % str(a) ) # <== rookie please use this expression
-    #print("result = %s" % a ) #<== python assume the variable is string type
+    print("result = %s" % str(a))  # <== rookie please use this expression
+    # print("result = %s" % a ) #<== python assume the variable is string type
 
     print("------ bubble shifting ------")
-    '''
+    a = [3, 6, -1, 7, 5, 4]
+    """
          0  1  2   3  4  5
     a = [3, 6, -1, 7, 5, 4]
          ^^^^^ index-0 vs index-1, compare, X
@@ -371,9 +436,75 @@ def leetcode_find_max():
     k = [0, ..., N-2] # k is the left index of each pair (comparison)    
 
     for k in range(0 , N-1, 1): #[0, ... N-2]
-    # HW0323(VK) : start from here next time. 
     
+    """
+    N = len(a)
+    for k in range(0, N - 1, 1):
+        if a[k] > a[k + 1]:
+            a[k],a[k+1]=a[k+1],a[k]
+            # swap
+    print(a[-1])
+    print(a)
+
+def leetcode_bubble_sort():
+    a = [3, 6, -1, 7, 5, 4]
     '''
+    3, 6, -1, 7, 5, 4
+    ^^^^^^^^^^^^^^^^^ N
+    3, -1, 6, 5, 4, 7
+    ^^^^^^^^^^^^^^^ N-1
+    -1  3  5  4  6  7
+    ^^^^^^^^^^^ N-2
+    ...
+
+    ^^^^^ 2
+
+    for n     [N, N-1, N-2.....2]:
+       for k     [0, .....n-2]
+          k...
+    #HW0325    
+    '''
+
+    return 
+
+
+def basic_swap():
+    # swap- generic swap
+    a = 5
+    b = 3
+    # Q: swap the values in a and b
+    c = a
+    a = b
+    b = c
+
+    print("unpack")
+    # Q: Give a list [5, 3]. Assign the index-0 and index-1 to x and y, respectively
+    a = [5, 3]
+    x = a[0]
+    y = a[1]
+
+    x, y = a  # <== unpack
+
+    # multi-variable assignment
+    # Q: Give the value of a b c to x y z
+    a = 5
+    b = 3
+    c = 6
+
+    x = a
+    y = b
+    z = c
+
+    x,y,z = a,b,c
+    
+    # swap- python specific
+    a = 5
+    b = 3
+    # Q: swap the values in a and b
+    a,b=b,a
+
+
+    return
 
 
 def basic_print_usage():

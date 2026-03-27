@@ -1,19 +1,11 @@
 # windows
 
-from basics import basic_print_usage
-from basics import leetcode_find_max
-from basics import basic_list_i
-from basics import basic_for_loop
-from basics import basic_range_usage
-from basics import leetcode_shuffle_two_lists
-from basics import basic_while_loop
-from basics import leetcode_merge_two_sorted_lists
-from basics import basic_swap
-from basics import leetcode_bubble_sort
+from basics import * 
+
 
 if __name__ == "__main__":
     # special meaning for Python execution, but we will talk about it later.
-    testID = 11
+    testID = 15
 
     if testID == 0:
         print("hello World")
@@ -37,28 +29,42 @@ if __name__ == "__main__":
         basic_swap()  # swap, unpack
     elif testID == 11:
         leetcode_bubble_sort()  # bubble sort
+    elif testID == 12:
+        basic_time_complexity()  # time complexity / space complexity
+    elif testID == 14:
+        leetcode_numbers_histogram()
+    elif testID == 15:
+        basic_list_ii() # built-in functions
     else:
         print("Not a supported testID = %d" % (testID))
 
 
 """
-------- baseic level -------
+------- basic level -------
 Part 1/3 - basics
-- time complexity : O(N) O(N^2)
-- bubble sort <=== HW0325
-- list_ii() : built-in function <== start leetcode from "easy"
-- copy concept : shallow copy, depp copy
+- list_ii() : built-in function
+- leetcode : histogram i <==
+- sliding window i 
 - list_iii() : ":"
+- copy concept : shallow copy, depp copy
 - call-by-reference, call-by-value
-- ..........
+- sliding window ii
+- string, ASCII code, KES
+- leetcode : histogram ii
 
 
 Part 2/3 - basic algorithms
-- 
-
+- dict : look-up table (LUT) / Hash table
+- practice : two sum
+- leetcode : roman to integer, integer to roman
+- sliding window iii : longest sub string
+- digit : decimal
+- digit : binary
 
 Part 3/3 - dynamic programming
-
+- dynamic programming : recursive programming
+- sort()
+....
 
 
 ------- leetcode 150 study plan -----

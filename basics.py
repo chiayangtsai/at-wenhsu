@@ -1,3 +1,56 @@
+def basic_time_complexity():
+    """
+        #     time
+    A   10     1
+        20     4
+        30     9
+        40    16
+
+    B   10     2
+        20     4
+        30     6
+        40     8
+
+    time complexity :
+        A : O(N^2)
+        B : O(N)
+
+    if the execution time increase is irrelevant to input data size
+       => O(N^0) = O(1)  : O-one
+
+    """
+    """
+    input data size N
+
+    # time complexity : O(N^2)
+    for i in ...N
+        for j in ... N
+            ....
+
+
+    # time complexity : O(N)
+    for i in ...N <== N
+        ....
+
+    for j in ....N <== N
+        .....
+
+
+    # time complexity : O(N^2)
+    for i in ...N <== N
+        ....
+    
+    for j in ....N       <== N^2
+        for k in ...N
+        .....
+    
+            
+
+    """
+
+    return
+
+
 def basic_while_loop():
     """
     for : very useful to "one container" loop structure
@@ -225,7 +278,18 @@ def leetcode_merge_two_sorted_lists():
             j = j + 1
     print(c)
     print("------- v3 ---------")
-    # TBV
+    '''
+    NOTE : Don't use "counter"
+    NOTE : only use .pop(index), append(element)
+    
+    '''
+    a = [2, 3, 5, 6]
+    b = [0, 1, 4, 7, 8]
+    c = []
+    # c=> [0, 1, 2, 3, 4, 5, 6, 7, 8]
+    #HW0326    
+
+
 
 
 def leetcode_shuffle_two_lists():
@@ -276,6 +340,7 @@ def leetcode_shuffle_two_lists():
     e = min(len(a), len(b))
     i = 0
     # deal with shared index(es)
+    # time complexity: O(N)
     while i < e:
         c += [a[i]]
         c += [b[i]]
@@ -322,7 +387,7 @@ def leetcode_shuffle_two_lists():
     i = 0  # for counting a
     j = 0  # for counting b
     # or , and
-
+    # time complexity : O(N)
     while i < len(a) or j < len(b):
         if i < len(a):
             # take a
@@ -410,6 +475,7 @@ def leetcode_find_max():
     """
     No additional global memory is required during the operation/execution
     """
+    # time complexity : O(N)
     a = [3, 6, -1, 7, 5, 4]
     for x in a:
         if x > a[0]:
@@ -438,17 +504,20 @@ def leetcode_find_max():
     for k in range(0 , N-1, 1): #[0, ... N-2]
     
     """
+    # time complexity : O(N)
     N = len(a)
     for k in range(0, N - 1, 1):
         if a[k] > a[k + 1]:
-            a[k],a[k+1]=a[k+1],a[k]
+            a[k], a[k + 1] = a[k + 1], a[k]
             # swap
     print(a[-1])
     print(a)
 
+
 def leetcode_bubble_sort():
     a = [3, 6, -1, 7, 5, 4]
-    '''
+    N = len(a)
+    """
     3, 6, -1, 7, 5, 4
     ^^^^^^^^^^^^^^^^^ N
     3, -1, 6, 5, 4, 7
@@ -463,9 +532,81 @@ def leetcode_bubble_sort():
        for k     [0, .....n-2]
           k...
     #HW0325    
-    '''
+    """
+    # time complexity : O(N^2) => optimal sorting algorithm O(N logN) => .sort()
+    for n in range(N, 1, -1):  # N
+        for k in range(0, n - 1, 1):  # N
+            if a[k] > a[k + 1]:
+                a[k], a[k + 1] = a[k + 1], a[k]
+                # swap
+    print(a)
 
-    return 
+    return
+
+
+def basic_list_ii():
+
+    print("------ append ---------")
+    # Q: Given a list "a", append -1
+    a = [3, 5]
+    # a => [3, 5, 1]
+    a = a + [-1] #拆掉重蓋
+    print(a)
+
+    a = [3, 5]
+    # a => [3, 5, 1]
+    a += [-1] #加蓋
+    print(a)
+
+    print("------ .append(element) ----")
+    a = [3, 5]
+    a.append(-1) #加蓋
+    print(a)
+
+    print("------ .pop(index) , return the pop-out element ----")
+    a = [3, 5, 1, 4, 2]
+    #Q: erase index-2 element from a
+    # => a = [3, 5, 4, 2]
+    k = 2
+    x = a.pop(k)
+    print(x)
+    print(a)
+
+    print("------ .pop() : equivalent to pop out the last element ----")
+
+    a = [3, 5, 1, 4, 2]
+    #Q: erase last element from a
+    a.pop(-1)
+    x = a.pop()
+    print(a)
+    
+
+    print("------ .insert(index, element) :  ----")
+    #TBV HW0326
+
+    
+    return
+
+
+def leetcode_numbers_histogram():
+    # Q: Given a list "nums", find the histogram of the numbers.
+    #   NOTE: the number value will range at 0<= value <= 9
+    nums = [6, 1, 0, 1, 2, 7, 6]
+    # print out the results in the following format in ascending order
+    """
+    0 : 1
+    1 : 2
+    2 : 1
+    6 : 2
+    7 : 1
+    
+    """
+    # HW0326 : 2-step approach
+
+    # Step 0 : gather statistics
+    # Step 1 : analyze raw data | statistics
+
+    return
 
 
 def basic_swap():
@@ -495,14 +636,13 @@ def basic_swap():
     y = b
     z = c
 
-    x,y,z = a,b,c
-    
+    x, y, z = a, b, c
+
     # swap- python specific
     a = 5
     b = 3
     # Q: swap the values in a and b
-    a,b=b,a
-
+    a, b = b, a
 
     return
 

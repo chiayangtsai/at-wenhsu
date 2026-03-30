@@ -1,3 +1,56 @@
+def maxProfit(prices):
+    # HW0329
+    maxP = 0
+    # .....
+    return maxP
+
+
+def leetcode_stock_trade_i():
+    """
+    https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description
+
+
+    You are given an array prices where prices[i] is the price of a given stock on
+    the ith day.
+
+    You want to maximize your profit by choosing a single day to buy one stock and
+    choosing a different day in the future to sell that stock.
+
+    Return the maximum profit you can achieve from this transaction. If you cannot
+    achieve any profit, return 0.
+
+
+
+    Example 1:
+
+    Input: prices = [7,1,5,3,6,4]
+    Output: 5
+    Explanation: Buy on day 2 (price = 1) and sell on day 5 (price = 6), profit =
+    6-1 = 5. Note that buying on day 2 and selling on day 1 is not allowed because
+    you must buy before you sell. Example 2:
+
+    Input: prices = [7,6,4,3,1]
+    Output: 0
+    Explanation: In this case, no transactions are done and the max profit = 0.
+
+
+    Constraints:
+
+    1 <= prices.length <= 10^5
+    0 <= prices[i] <= 10^4
+    """
+    # target : O(N), at least O(N^2)
+
+    prices = [7, 1, 5, 3, 6, 4]
+    print("max profit : %d (ans 5)\n" % maxProfit(prices))
+
+    prices = [7, 6, 4, 3, 0]
+    print("max profit : %d (ans 0)\n" % maxProfit(prices))
+
+    prices = [4, 5, 4, 3, 7, 6, 9, 1, 4]
+    print("max profit : %d (ans 6)\n\n" % maxProfit(prices))
+
+
 def basic_time_complexity():
     """
         #     time
@@ -5,7 +58,6 @@ def basic_time_complexity():
         20     4
         30     9
         40    16
-
     B   10     2
         20     4
         30     6
@@ -278,18 +330,49 @@ def leetcode_merge_two_sorted_lists():
             j = j + 1
     print(c)
     print("------- v3 ---------")
-    '''
+    """
     NOTE : Don't use "counter"
     NOTE : only use .pop(index), append(element)
     
-    '''
+    """
     a = [2, 3, 5, 6]
     b = [0, 1, 4, 7, 8]
     c = []
     # c=> [0, 1, 2, 3, 4, 5, 6, 7, 8]
-    #HW0326    
+    # HW0326
 
+    while len(a) != 0 or len(b) != 0:
+        if (len(a) != 0 and len(b) != 0 and a[0] < b[0]) or len(b) == 0:
+            c.append(a.pop(0))
+        else:
+            c.append(b.pop(0))
+    print(c)
 
+    print("------- v4 -  ---------")
+
+    """
+    x = [3, 1, 5, 4, 2]
+    #Q: if x is not empty, print "not empty"
+    if x:
+        print("not empty")
+
+    y = [3, 1, 4]
+    #Q: if y is empty, print "empty"
+    if not y:
+        print("empty")
+    """
+
+    a = [2, 3, 5, 6]
+    b = [0, 1, 4, 7, 8]
+    c = []
+    # c=> [0, 1, 2, 3, 4, 5, 6, 7, 8]
+
+    while a or b:
+        if (a and b and a[0] < b[0]) or not b:
+            c.append(a.pop(0))
+        else:
+            c.append(b.pop(0))
+    print(c)
 
 
 def leetcode_shuffle_two_lists():
@@ -545,27 +628,26 @@ def leetcode_bubble_sort():
 
 
 def basic_list_ii():
-
     print("------ append ---------")
     # Q: Given a list "a", append -1
     a = [3, 5]
     # a => [3, 5, 1]
-    a = a + [-1] #拆掉重蓋
+    a = a + [-1]  # 拆掉重蓋
     print(a)
 
     a = [3, 5]
     # a => [3, 5, 1]
-    a += [-1] #加蓋
+    a += [-1]  # 加蓋
     print(a)
 
     print("------ .append(element) ----")
     a = [3, 5]
-    a.append(-1) #加蓋
+    a.append(-1)  # 加蓋
     print(a)
 
     print("------ .pop(index) , return the pop-out element ----")
     a = [3, 5, 1, 4, 2]
-    #Q: erase index-2 element from a
+    # Q: erase index-2 element from a
     # => a = [3, 5, 4, 2]
     k = 2
     x = a.pop(k)
@@ -575,16 +657,23 @@ def basic_list_ii():
     print("------ .pop() : equivalent to pop out the last element ----")
 
     a = [3, 5, 1, 4, 2]
-    #Q: erase last element from a
+    # Q: erase last element from a
     a.pop(-1)
     x = a.pop()
     print(a)
-    
+
+    print("---- del a[index] ----")
+    a = [3, 5, 1, 4, 2]
+    # Q: erase index-2 element from a
+    del a[2]
+    print(a)
 
     print("------ .insert(index, element) :  ----")
-    #TBV HW0326
+    a = [3, 5, 1, 4, 2]
+    # Q : insert -1 to index-2 position [3, 5, -1, 1, 4, 2]
+    a.insert(2, -1)
+    print(a)
 
-    
     return
 
 
@@ -599,13 +688,31 @@ def leetcode_numbers_histogram():
     2 : 1
     6 : 2
     7 : 1
-    
     """
+
+    """
+    KES algorithm : use the data range index to establish look-up table (LUT)
+
+    number <-> show times
+
+    number <-> list index <-> show time
+               ^^^^^^^^^^^^^^^^^^^^^^^^ list
+        
+    """
+
+    # time complexity : O(N)
+
     # HW0326 : 2-step approach
+    c = [0] * 10
 
     # Step 0 : gather statistics
-    # Step 1 : analyze raw data | statistics
+    for x in nums:  # O(N)
+        c[x] += 1
 
+    # Step 1 : analyze raw data | statistics
+    for i in range(0, 10, 1):  # O(1)
+        if c[i] > 0:
+            print(i, ":", c[i])
     return
 
 
@@ -701,5 +808,48 @@ def basic_print_usage():
     print(newStr)
 
     print("pi is %s" % str(pi))
+
+    return
+
+
+def basic_copy_concept():
+    print("------- deep copy ------")
+    a = 5 # immutable variable
+    b = a
+    print("a= %d, b= %d" % (a, b))
+    b= -1
+    print("a= %d, b= %d" % (a, b))
+
+    print("------- shallow copy ------")
+    a= [7, 5] # mutable variable
+    b = a
+    print("a= %s, b= %s" % (a, b))
+    b[0]= -1
+    print("a= %s, b= %s" % (a, b))
+
+    '''
+    immutable: integer, floating point, string, tuple (TBV)
+        copy : deep copy
+
+    mutable: list, dict (TBV)
+        copy : shallow copy
+    
+    
+    '''    
+    name = "John" 
+    print(name[0])
+    print(name[1])
+    # name.append("y") <==X "string" is immutable
+    name = name + "y"
+
+    print("------- list: deep copy ------")
+    a= [7, 5] # mutable variable
+    b = a #HW0329 (VK) : start from here next time.
+    print("a= %s, b= %s" % (a, b))
+    b[0]= -1
+    print("a= %s, b= %s" % (a, b))
+
+    
+    
 
     return

@@ -39,6 +39,7 @@ if __name__ == "__main__":
         leetcode_stock_trade_i() #sliding window
     elif testID == 17:
         basic_copy_concept() #copy
+    
     else:
         print("Not a supported testID = %d" % (testID))
 
@@ -46,9 +47,8 @@ if __name__ == "__main__":
 """
 ------- basic level -------
 Part 1/3 - basics
-- sliding window i  <== HW
-- list_iii() : ":"
-- copy concept : shallow copy, depp copy
+- list_iii() : ":" <=== HW0330(VK) start from here
+- copy concept : shallow copy, depp copy <==
 - call-by-reference, call-by-value
 - sliding window ii
 - string, ASCII code, KES

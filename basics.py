@@ -1,8 +1,10 @@
-def maxProfit(prices):
-    # HW0329
-    maxP = 0
-    # .....
-    return maxP
+
+'''
+
+- head index : always moving
+- tail index : conditionally moving triggered by new head data
+'''
+
 
 
 def leetcode_stock_trade_i():
@@ -41,6 +43,27 @@ def leetcode_stock_trade_i():
     """
     # target : O(N), at least O(N^2)
 
+    print("----- v0 --- O(N^2)---")
+    #time complexity : O(N^2)
+    #space complexity : O
+    def maxProfit(prices):
+        # HW0329
+        #prices = [7, 1, 5, 3, 6, 4]
+        N=len(prices)
+        profits=[]
+        for k in range(0,N-1,1):
+            for j in range(k+1,N,1):
+                profits.append(prices[j]-prices[k]) 
+                
+        maxP = max(profits)
+
+        return 0 if maxP<0 else maxP
+                
+        # if maxP<0:
+        #     return 0
+        # else:
+        #     return maxP
+            
     prices = [7, 1, 5, 3, 6, 4]
     print("max profit : %d (ans 5)\n" % maxProfit(prices))
 
@@ -49,6 +72,94 @@ def leetcode_stock_trade_i():
 
     prices = [4, 5, 4, 3, 7, 6, 9, 1, 4]
     print("max profit : %d (ans 6)\n\n" % maxProfit(prices))
+    
+    print("----- v1 --- O(N)---")
+    #O(N)
+    def maxProfitAlt(prices):
+        # HW0329
+        #prices = [7, 1, 5, 3, 6, 4]
+        N=len(prices)
+
+        min_price=prices[0]
+        maxP=0
+        for i in range(1,N,1):
+            if prices[i]<min_price:
+                min_price=prices[i]
+            if prices[i]-min_price>maxP:
+                maxP=prices[i]-min_price
+        return maxP  
+    
+    prices = [7, 1, 5, 3, 6, 4]
+    print("max profit : %d (ans 5)\n" % maxProfitAlt(prices))
+    
+    prices = [7, 6, 4, 3, 0]
+    print("max profit : %d (ans 0)\n" % maxProfitAlt(prices))
+    
+    prices = [4, 5, 4, 3, 7, 6, 9, 1, 4]
+    print("max profit : %d (ans 6)\n\n" % maxProfitAlt(prices))
+    
+
+
+    print("----- v2 --- O(N)---")
+    '''   
+             0  1  2  3  4  5  6  7  8
+             4  5  4  3  7  6  9  1  4
+                                     h
+                                  t
+     profit  0  1  0     4  3  6     3
+     maxP    0  1  1     4  4  6     6
+    
+    '''
+    #O(N)
+    def maxProfitLR(prices):
+        maxP=0
+        t =0
+        for h in range(1,len(prices),1):
+            if prices[h]>=prices[t]:
+                profit=prices[h]-prices[t]
+                if profit>maxP:
+                           maxP=profit
+            else:
+                t=h
+        return maxP  
+    
+    prices = [7, 1, 5, 3, 6, 4]
+    print("max profit : %d (ans 5)\n" % maxProfitLR(prices))
+    
+    prices = [7, 6, 4, 3, 0]
+    print("max profit : %d (ans 0)\n" % maxProfitLR(prices))
+    
+    prices = [4, 5, 4, 3, 7, 6, 9, 1, 4]
+    print("max profit : %d (ans 6)\n\n" % maxProfitLR(prices))
+
+
+    print("----- v3 --- O(N)---")
+    '''   
+             0  1  2  3  4  5  6  7  8
+             4  5  4  3  7  6  9  1  4
+             h (買)                       
+                               t
+     profit  5  4  5  6  2  3     3  0
+     maxP    6  6  6  6  3  3     3  0
+    
+    '''
+    #O(N)
+    def maxProfitRL(prices):
+        maxP=0
+        #HW0330
+
+        return maxP  
+    
+    prices = [7, 1, 5, 3, 6, 4]
+    print("max profit : %d (ans 5)\n" % maxProfitRL(prices))
+    
+    prices = [7, 6, 4, 3, 0]
+    print("max profit : %d (ans 0)\n" % maxProfitRL(prices))
+    
+    prices = [4, 5, 4, 3, 7, 6, 9, 1, 4]
+    print("max profit : %d (ans 6)\n\n" % maxProfitRL(prices))
+    
+    
 
 
 def basic_time_complexity():
@@ -834,7 +945,6 @@ def basic_copy_concept():
     mutable: list, dict (TBV)
         copy : shallow copy
     
-    
     '''    
     name = "John" 
     print(name[0])
@@ -844,12 +954,31 @@ def basic_copy_concept():
 
     print("------- list: deep copy ------")
     a= [7, 5] # mutable variable
-    b = a #HW0329 (VK) : start from here next time.
+
+    #-method 0 --
+    b= []
+    for x in a:
+        b.append(x)
+        # b += [x]
+        # b = b+ [x]
+    #-method 0.1 --
+    b= [x for x in a]
+    #-method 1 --
+    b = list(a)
+
+    #--method 2 ---
+    ##TBV
+    
     print("a= %s, b= %s" % (a, b))
     b[0]= -1
     print("a= %s, b= %s" % (a, b))
 
-    
+    print("---- simplifed unpack -----")
+    #Q: Given a list "nums", pick up all the negative numbers and assign a new list "nums"
+    nums = [3, -1, -2, 0, 7, -3]
+    # => nums = [-1, -2, -3]
+    nums=[x for x in nums if x<0]
+    print(nums)
     
 
     return

@@ -5,7 +5,7 @@ from basics import *
 
 if __name__ == "__main__":
     # special meaning for Python execution, but we will talk about it later.
-    testID = 17
+    testID = 20
 
     if testID == 0:
         print("hello World")
@@ -38,8 +38,13 @@ if __name__ == "__main__":
     elif testID == 16:
         leetcode_stock_trade_i() #sliding window
     elif testID == 17:
-        basic_copy_concept() #copy
-    
+        leetcode_stock_trade_iii()
+    elif testID == 18:
+        basic_copy_concept() #copy : shallow copy, deep copy
+    elif testID == 19:
+        basic_list_iii() # :
+    elif testID == 20:
+        basic_call_by_reference() # call by reference, call by value
     else:
         print("Not a supported testID = %d" % (testID))
 
@@ -47,10 +52,8 @@ if __name__ == "__main__":
 """
 ------- basic level -------
 Part 1/3 - basics
-- list_iii() : ":" <=== HW0330(VK) start from here
-- copy concept : shallow copy, depp copy <==
+- sliding window ii <== HW
 - call-by-reference, call-by-value
-- sliding window ii
 - string, ASCII code, KES
 - leetcode : histogram ii
 

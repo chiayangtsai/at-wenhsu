@@ -1,10 +1,73 @@
-
-'''
+"""
 
 - head index : always moving
 - tail index : conditionally moving triggered by new head data
-'''
+"""
 
+
+
+def leetcode_stock_trade_iii():
+    '''
+    https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iii/description/
+    
+    You are given an array prices where prices[i] is the price of a given stock on the ith day.
+    
+    Find the maximum profit you can achieve. You may complete at most two transactions.
+    
+    Note: You may not engage in multiple transactions simultaneously (i.e., you must sell the stock before you buy again).
+    
+    Example 1:
+    Input: prices = [3,3,5,0,0,3,1,4]
+    Output: 6
+    Explanation: Buy on day 4 (price = 0) and sell on day 6 (price = 3), profit = 3-0 = 3.
+    Then buy on day 7 (price = 1) and sell on day 8 (price = 4), profit = 4-1 = 3.
+    
+    Example 2:
+    
+    Input: prices = [1,2,3,4,5]
+    Output: 4
+    Explanation: Buy on day 1 (price = 1) and sell on day 5 (price = 5), profit = 5-1 = 4.
+    Note that you cannot buy on day 1, buy on day 2 and sell them later, as you are engaging multiple transactions at the same time. You must sell before buying again.
+    Example 3:
+    
+    Input: prices = [7,6,4,3,1]
+    Output: 0
+    Explanation: In this case, no transaction is done, i.e. max profit = 0.
+    
+    Constraints:
+    
+    1 <= prices.length <= 10^5
+    0 <= prices[i] <= 10^5
+    '''
+
+    '''
+    f({a, b, c, d}) =max{  f({a})          +   f({b, c, d}),
+                           f({a, b})       +   f({c, d}),
+                           f({a, b, c})    +   f({d}),
+                           f({a, b, c, d})     f({}) 
+                         }
+    ==> at least O(N^2)
+    ==> optimal O(N)
+    '''
+    
+    def maxProfit(prices):
+        #HW0401
+        return -1 #TBD
+
+    prices = [1, 3, 5, 4, 3, 7, 6, 9, 2, 4]
+    print("max profit : %d (ans 10)\n\n" % maxProfit(prices))
+    
+    prices = [1, 2, 4, 2, 5, 7, 2, 4, 9, 0]
+    print("max profit : %d (ans 13)\n\n" % maxProfit(prices))
+    
+    prices = [3, 3, 5, 0, 0, 3, 1, 4]
+    print("max profit : %d (ans 6)\n\n" % maxProfit(prices))
+    
+    prices = [1, 2, 3, 4, 5]
+    print("max profit : %d (ans 4)\n\n" % maxProfit(prices))
+    
+    prices = [7, 6, 4, 3, 1]
+    print("max profit : %d (ans 0)\n\n" % maxProfit(prices))
 
 
 def leetcode_stock_trade_i():
@@ -44,26 +107,27 @@ def leetcode_stock_trade_i():
     # target : O(N), at least O(N^2)
 
     print("----- v0 --- O(N^2)---")
-    #time complexity : O(N^2)
-    #space complexity : O
+
+    # time complexity : O(N^2)
+    # space complexity : O
     def maxProfit(prices):
         # HW0329
-        #prices = [7, 1, 5, 3, 6, 4]
-        N=len(prices)
-        profits=[]
-        for k in range(0,N-1,1):
-            for j in range(k+1,N,1):
-                profits.append(prices[j]-prices[k]) 
-                
+        # prices = [7, 1, 5, 3, 6, 4]
+        N = len(prices)
+        profits = []
+        for k in range(0, N - 1, 1):
+            for j in range(k + 1, N, 1):
+                profits.append(prices[j] - prices[k])
+
         maxP = max(profits)
 
-        return 0 if maxP<0 else maxP
-                
+        return 0 if maxP < 0 else maxP
+
         # if maxP<0:
         #     return 0
         # else:
         #     return maxP
-            
+
     prices = [7, 1, 5, 3, 6, 4]
     print("max profit : %d (ans 5)\n" % maxProfit(prices))
 
@@ -72,36 +136,35 @@ def leetcode_stock_trade_i():
 
     prices = [4, 5, 4, 3, 7, 6, 9, 1, 4]
     print("max profit : %d (ans 6)\n\n" % maxProfit(prices))
-    
+
     print("----- v1 --- O(N)---")
-    #O(N)
+
+    # O(N)
     def maxProfitAlt(prices):
         # HW0329
-        #prices = [7, 1, 5, 3, 6, 4]
-        N=len(prices)
+        # prices = [7, 1, 5, 3, 6, 4]
+        N = len(prices)
 
-        min_price=prices[0]
-        maxP=0
-        for i in range(1,N,1):
-            if prices[i]<min_price:
-                min_price=prices[i]
-            if prices[i]-min_price>maxP:
-                maxP=prices[i]-min_price
-        return maxP  
-    
+        min_price = prices[0]
+        maxP = 0
+        for i in range(1, N, 1):
+            if prices[i] < min_price:
+                min_price = prices[i]
+            if prices[i] - min_price > maxP:
+                maxP = prices[i] - min_price
+        return maxP
+
     prices = [7, 1, 5, 3, 6, 4]
     print("max profit : %d (ans 5)\n" % maxProfitAlt(prices))
-    
+
     prices = [7, 6, 4, 3, 0]
     print("max profit : %d (ans 0)\n" % maxProfitAlt(prices))
-    
+
     prices = [4, 5, 4, 3, 7, 6, 9, 1, 4]
     print("max profit : %d (ans 6)\n\n" % maxProfitAlt(prices))
-    
-
 
     print("----- v2 --- O(N)---")
-    '''   
+    """   
              0  1  2  3  4  5  6  7  8
              4  5  4  3  7  6  9  1  4
                                      h
@@ -109,57 +172,65 @@ def leetcode_stock_trade_i():
      profit  0  1  0     4  3  6     3
      maxP    0  1  1     4  4  6     6
     
-    '''
-    #O(N)
+    """
+
+    # O(N)
     def maxProfitLR(prices):
-        maxP=0
-        t =0
-        for h in range(1,len(prices),1):
-            if prices[h]>=prices[t]:
-                profit=prices[h]-prices[t]
-                if profit>maxP:
-                           maxP=profit
+        maxP = 0
+        t = 0
+        for h in range(1, len(prices), 1):
+            if prices[h] >= prices[t]:
+                profit = prices[h] - prices[t]
+                if profit > maxP:
+                    maxP = profit
             else:
-                t=h
-        return maxP  
-    
+                t = h
+        return maxP
+
     prices = [7, 1, 5, 3, 6, 4]
     print("max profit : %d (ans 5)\n" % maxProfitLR(prices))
-    
+
     prices = [7, 6, 4, 3, 0]
     print("max profit : %d (ans 0)\n" % maxProfitLR(prices))
-    
+
     prices = [4, 5, 4, 3, 7, 6, 9, 1, 4]
     print("max profit : %d (ans 6)\n\n" % maxProfitLR(prices))
 
-
     print("----- v3 --- O(N)---")
-    '''   
-             0  1  2  3  4  5  6  7  8
-             4  5  4  3  7  6  9  1  4
+    """   
+             0  1  2  3  4  5  6  7  8  (index)
+             4  5  4  3  7  6  9  1  4  
              h (買)                       
                                t
      profit  5  4  5  6  2  3     3  0
      maxP    6  6  6  6  3  3     3  0
     
-    '''
-    #O(N)
-    def maxProfitRL(prices):
-        maxP=0
-        #HW0330
+    """
 
-        return maxP  
-    
+    # O(N)
+    def maxProfitRL(prices):
+        maxP = 0
+        t = len(prices) - 1
+        for h in range(len(prices) - 1, -1, -1):
+            if prices[h] <= prices[t]:
+                profit = prices[t] - prices[h]
+                if profit > maxP:
+                    maxP = profit
+            else:
+                t = h
+
+        # HW0330
+
+        return maxP
+
     prices = [7, 1, 5, 3, 6, 4]
     print("max profit : %d (ans 5)\n" % maxProfitRL(prices))
-    
+
     prices = [7, 6, 4, 3, 0]
     print("max profit : %d (ans 0)\n" % maxProfitRL(prices))
-    
+
     prices = [4, 5, 4, 3, 7, 6, 9, 1, 4]
     print("max profit : %d (ans 6)\n\n" % maxProfitRL(prices))
-    
-    
 
 
 def basic_time_complexity():
@@ -925,60 +996,147 @@ def basic_print_usage():
 
 def basic_copy_concept():
     print("------- deep copy ------")
-    a = 5 # immutable variable
+    a = 5  # immutable variable
     b = a
     print("a= %d, b= %d" % (a, b))
-    b= -1
+    b = -1
     print("a= %d, b= %d" % (a, b))
 
     print("------- shallow copy ------")
-    a= [7, 5] # mutable variable
+    a = [7, 5]  # mutable variable
     b = a
     print("a= %s, b= %s" % (a, b))
-    b[0]= -1
+    b[0] = -1
     print("a= %s, b= %s" % (a, b))
 
-    '''
+    """
     immutable: integer, floating point, string, tuple (TBV)
         copy : deep copy
 
     mutable: list, dict (TBV)
         copy : shallow copy
     
-    '''    
-    name = "John" 
+    """
+    name = "John"
     print(name[0])
     print(name[1])
     # name.append("y") <==X "string" is immutable
     name = name + "y"
 
     print("------- list: deep copy ------")
-    a= [7, 5] # mutable variable
+    a = [7, 5]  # mutable variable
 
-    #-method 0 --
-    b= []
+    # -method 0 --
+    b = []
     for x in a:
         b.append(x)
         # b += [x]
         # b = b+ [x]
-    #-method 0.1 --
-    b= [x for x in a]
-    #-method 1 --
-    b = list(a)
+    # -method 0.1 --
+    b = [x for x in a]
+    # -method 1 --
+    b = list(a) #<== RECOMMENDED
 
-    #--method 2 ---
-    ##TBV
-    
+    # --method 2 ---
+    b = a[:] #<== RECOMMENDED
+
     print("a= %s, b= %s" % (a, b))
-    b[0]= -1
+    b[0] = -1
     print("a= %s, b= %s" % (a, b))
 
     print("---- simplifed unpack -----")
-    #Q: Given a list "nums", pick up all the negative numbers and assign a new list "nums"
+    # Q: Given a list "nums", pick up all the negative numbers and assign a new list "nums"
     nums = [3, -1, -2, 0, 7, -3]
     # => nums = [-1, -2, -3]
-    nums=[x for x in nums if x<0]
+    nums = [x for x in nums if x < 0]
     print(nums)
-    
 
     return
+
+
+def basic_list_iii():
+    a = [3, 1, 5, 4, 2, 0, -2]
+    #    0  1  2  3  4  5  6
+    # Q: print out the index-2 element.
+    print(a[2])
+
+    # Q: print out the elements from index-2 to index-4, [5, 4, 2]
+    print(a[2:5:1])
+
+    # Q: print out the elements from index-1 to index-3
+    print(a[1:4:1])
+
+    """
+        a [ starting index boundary :  ending index boundary  : step   ]
+            ^^^^^^^^^^^^^^^^^^^^^^^     ^^^^^^^^^^^^^^^^^^^^
+               inclusive                 exclusive
+
+        1) if reached boundary, leave it empty.
+        2) if step is 1, ":1" can be ignored.
+
+        index-2 to index-4
+        a[2 : 5 :  1]
+    
+    
+    """
+
+    nums = [5, -1, 0, 2, 6, 3, 7, 9]
+    #       0   1  2  3  4  5  6  7
+
+    #Q: print out elements from index-2 to index-5
+    print(nums[2:6:1])
+
+    #Q: print out elements from index-4 to the end 
+    print(nums[4:]) # python compiler fixes the problem
+
+
+    #Q: print out elements from index-0 to index-3 
+    print(nums[0:4]) 
+    print(nums[:4]) 
+
+    #Q: print out elements from index-5 to index-2 [3, 6, 2, 0]
+    print(nums[5:1:-1])
+    
+    #Q: print out elements from index-5 to index-0 [3, 6, 2, 0, -1, 5]
+    print(nums[5::-1])
+
+    #Q: print out elements in reversed order [9, 7, 3, 6, 2, 0, -1, 5]
+    print(nums[::-1])
+
+    #Q: print out a deep-copy of nums [5, -1, 0, 2, 6, 3, 7, 9]
+    print(nums[:] )
+
+
+def basic_call_by_reference():
+
+    print("------ call by value --------")
+    def my_sum(x,y): # x = a, y = b
+        c=x+y
+        return c
+    
+    #Q: give a and b , calcualte the sum using function.
+    a = 5 # immutable
+    b = 3 # immutable
+    c = my_sum(a, b)    
+    print(c)
+
+    
+    print("------ call by reference --------")
+    def my_append_minus_one(x): # x = a <== shallow copy
+        x = x + [-1] #拆掉重蓋  (X) <=== HW0401 (VK) start from here
+        #x += [-1]    #加蓋     (O)
+        #x.append(-1) #加蓋     (O)
+        print(x)
+        
+
+    #Q : give list "a", append -1 to a using function
+    a= [3, 0]
+    print("before : %s" % a)
+    my_append_minus_one(a)
+    print("after : %s" % a) #[3, 0, -1]
+
+
+
+    print("------ function call - full permission --------")
+    print("------ function call - deep copy + full permission --------")
+    print("------ function call - read only --------")

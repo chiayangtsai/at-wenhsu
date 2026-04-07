@@ -52,7 +52,7 @@ if __name__ == "__main__":
 """
 ------- basic level -------
 Part 1/3 - basics
-- sliding window ii <== HW
+- sliding window ii <== HW0406
 - call-by-reference, call-by-value
 - string, ASCII code, KES
 - leetcode : histogram ii
@@ -65,6 +65,8 @@ Part 2/3 - basic algorithms
 - sliding window iii : longest sub string
 - digit : decimal
 - digit : binary
+
+<-     able to start AI coding  : Cursor/Claude Code  -> light introduction
 
 Part 3/3 - dynamic programming
 - dynamic programming : recursive programming

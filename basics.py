@@ -5,42 +5,41 @@
 """
 
 
-
 def leetcode_stock_trade_iii():
-    '''
+    """
     https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iii/description/
-    
+
     You are given an array prices where prices[i] is the price of a given stock on the ith day.
-    
+
     Find the maximum profit you can achieve. You may complete at most two transactions.
-    
+
     Note: You may not engage in multiple transactions simultaneously (i.e., you must sell the stock before you buy again).
-    
+
     Example 1:
     Input: prices = [3,3,5,0,0,3,1,4]
     Output: 6
     Explanation: Buy on day 4 (price = 0) and sell on day 6 (price = 3), profit = 3-0 = 3.
     Then buy on day 7 (price = 1) and sell on day 8 (price = 4), profit = 4-1 = 3.
-    
+
     Example 2:
-    
+
     Input: prices = [1,2,3,4,5]
     Output: 4
     Explanation: Buy on day 1 (price = 1) and sell on day 5 (price = 5), profit = 5-1 = 4.
     Note that you cannot buy on day 1, buy on day 2 and sell them later, as you are engaging multiple transactions at the same time. You must sell before buying again.
     Example 3:
-    
+
     Input: prices = [7,6,4,3,1]
     Output: 0
     Explanation: In this case, no transaction is done, i.e. max profit = 0.
-    
+
     Constraints:
-    
+
     1 <= prices.length <= 10^5
     0 <= prices[i] <= 10^5
-    '''
+    """
 
-    '''
+    """
     f({a, b, c, d}) =max{  f({a})          +   f({b, c, d}),
                            f({a, b})       +   f({c, d}),
                            f({a, b, c})    +   f({d}),
@@ -48,26 +47,85 @@ def leetcode_stock_trade_iii():
                          }
     ==> at least O(N^2)
     ==> optimal O(N)
-    '''
-    
+    """
+
+    def deriveProfit(prices):
+        t =0
+        maxP = 0
+        for h in range(1, len(prices), 1):
+            if prices[h] >= prices[t]:
+                profit = prices[h] - prices[t]
+                if profit > maxP:
+                    maxP = profit
+            else:
+                t = h
+        return maxP
+
     def maxProfit(prices):
-        #HW0401
-        return -1 #TBD
+        # time complexity : O(N^2) -> O(N) ?
+
+        n = len(prices)
+        maxP = 0
+        for k in range(n + 1):
+            profit = deriveProfit(prices[:k]) + deriveProfit(prices[k:])
+            if profit > maxP:
+                maxP = profit
+        # HW0401
+        return maxP  # TBD
 
     prices = [1, 3, 5, 4, 3, 7, 6, 9, 2, 4]
     print("max profit : %d (ans 10)\n\n" % maxProfit(prices))
-    
+
     prices = [1, 2, 4, 2, 5, 7, 2, 4, 9, 0]
     print("max profit : %d (ans 13)\n\n" % maxProfit(prices))
-    
+
     prices = [3, 3, 5, 0, 0, 3, 1, 4]
     print("max profit : %d (ans 6)\n\n" % maxProfit(prices))
-    
+
     prices = [1, 2, 3, 4, 5]
     print("max profit : %d (ans 4)\n\n" % maxProfit(prices))
-    
+
     prices = [7, 6, 4, 3, 1]
     print("max profit : %d (ans 0)\n\n" % maxProfit(prices))
+
+    print("-------- v1 : O(N) ------------")
+    '''
+    f({a, b, c, d}) =max{  
+                           f({})           + f({a,b, c, d})
+                           f({a})          +   f({b, c, d}),
+                           f({a, b})       +      f({c, d}),
+                           f({a, b, c})    +         f({d}),
+                           f({a, b, c, d})            f ({}) 
+                         }
+
+    # step 1: get f(a, b, c, d), f(a, b, c), f(a, b), f(a) (L->R)
+    # save to tableLR
+
+    # Step 2: get R->L
+    # save to tableRL
+
+    #Step 3: for loop to loop all combinations
+    
+    '''
+
+    def maxProfitAlt(prices):
+        #HW0406 : use two LUTs to save time complexity.
+        return -1
+
+    prices = [1, 3, 5, 4, 3, 7, 6, 9, 2, 4]
+    print("max profit : %d (ans 10)\n\n" % maxProfitAlt(prices))
+
+    prices = [1, 2, 4, 2, 5, 7, 2, 4, 9, 0]
+    print("max profit : %d (ans 13)\n\n" % maxProfitAlt(prices))
+
+    prices = [3, 3, 5, 0, 0, 3, 1, 4]
+    print("max profit : %d (ans 6)\n\n" % maxProfitAlt(prices))
+
+    prices = [1, 2, 3, 4, 5]
+    print("max profit : %d (ans 4)\n\n" % maxProfitAlt(prices))
+
+    prices = [7, 6, 4, 3, 1]
+    print("max profit : %d (ans 0)\n\n" % maxProfitAlt(prices))
 
 
 def leetcode_stock_trade_i():
@@ -167,10 +225,10 @@ def leetcode_stock_trade_i():
     """   
              0  1  2  3  4  5  6  7  8
              4  5  4  3  7  6  9  1  4
-                                     h
-                                  t
-     profit  0  1  0     4  3  6     3
-     maxP    0  1  1     4  4  6     6
+                         h
+                      t
+     profit  0  1  0     4
+     maxP    0  1  1  1  4
     
     """
 
@@ -1035,10 +1093,10 @@ def basic_copy_concept():
     # -method 0.1 --
     b = [x for x in a]
     # -method 1 --
-    b = list(a) #<== RECOMMENDED
+    b = list(a)  # <== RECOMMENDED
 
     # --method 2 ---
-    b = a[:] #<== RECOMMENDED
+    b = a[:]  # <== RECOMMENDED
 
     print("a= %s, b= %s" % (a, b))
     b[0] = -1
@@ -1083,59 +1141,55 @@ def basic_list_iii():
     nums = [5, -1, 0, 2, 6, 3, 7, 9]
     #       0   1  2  3  4  5  6  7
 
-    #Q: print out elements from index-2 to index-5
+    # Q: print out elements from index-2 to index-5
     print(nums[2:6:1])
 
-    #Q: print out elements from index-4 to the end 
-    print(nums[4:]) # python compiler fixes the problem
+    # Q: print out elements from index-4 to the end
+    print(nums[4:])  # python compiler fixes the problem
 
+    # Q: print out elements from index-0 to index-3
+    print(nums[0:4])
+    print(nums[:4])
 
-    #Q: print out elements from index-0 to index-3 
-    print(nums[0:4]) 
-    print(nums[:4]) 
-
-    #Q: print out elements from index-5 to index-2 [3, 6, 2, 0]
+    # Q: print out elements from index-5 to index-2 [3, 6, 2, 0]
     print(nums[5:1:-1])
-    
-    #Q: print out elements from index-5 to index-0 [3, 6, 2, 0, -1, 5]
+
+    # Q: print out elements from index-5 to index-0 [3, 6, 2, 0, -1, 5]
     print(nums[5::-1])
 
-    #Q: print out elements in reversed order [9, 7, 3, 6, 2, 0, -1, 5]
+    # Q: print out elements in reversed order [9, 7, 3, 6, 2, 0, -1, 5]
     print(nums[::-1])
 
-    #Q: print out a deep-copy of nums [5, -1, 0, 2, 6, 3, 7, 9]
-    print(nums[:] )
+    # Q: print out a deep-copy of nums [5, -1, 0, 2, 6, 3, 7, 9]
+    print(nums[:])
 
 
 def basic_call_by_reference():
-
     print("------ call by value --------")
-    def my_sum(x,y): # x = a, y = b
-        c=x+y
+
+    def my_sum(x, y):  # x = a, y = b
+        c = x + y
         return c
-    
-    #Q: give a and b , calcualte the sum using function.
-    a = 5 # immutable
-    b = 3 # immutable
-    c = my_sum(a, b)    
+
+    # Q: give a and b , calcualte the sum using function.
+    a = 5  # immutable
+    b = 3  # immutable
+    c = my_sum(a, b)
     print(c)
 
-    
     print("------ call by reference --------")
-    def my_append_minus_one(x): # x = a <== shallow copy
-        x = x + [-1] #拆掉重蓋  (X) <=== HW0401 (VK) start from here
+
+    def my_append_minus_one(x):  # x = a <== shallow copy
+        x = x + [-1]  # 拆掉重蓋  (X) 
         #x += [-1]    #加蓋     (O)
         #x.append(-1) #加蓋     (O)
-        print(x)
-        
+        print("x = %s" % x)
 
-    #Q : give list "a", append -1 to a using function
-    a= [3, 0]
+    # Q : give list "a", append -1 to a using function
+    a = [3, 0] #<== mutable <== copy: shallow copy
     print("before : %s" % a)
     my_append_minus_one(a)
-    print("after : %s" % a) #[3, 0, -1]
-
-
+    print("after : %s" % a)  # [3, 0, -1]
 
     print("------ function call - full permission --------")
     print("------ function call - deep copy + full permission --------")

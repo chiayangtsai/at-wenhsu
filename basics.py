@@ -62,7 +62,8 @@ def leetcode_stock_trade_iii():
         return maxP
 
     def maxProfit(prices):
-        # time complexity : O(N^2) -> O(N) ?
+        # time complexity : O(N^2)
+        # space complexity : O(1) 
 
         n = len(prices)
         maxP = 0
@@ -109,8 +110,32 @@ def leetcode_stock_trade_iii():
     '''
 
     def maxProfitAlt(prices):
+        # time complexity : O(N)
+        # space complexity : O(N) 
+
+        n=len(prices)
+        tableLR=[0]*n
+        min_price=prices[0]
+        for i in range(1,n):
+            min_price=min(min_price,prices[i])
+            tableLR[i]=max(tableLR[i-1],prices[i]-min_price)
+        
+        tableRL=[0]*n
+        max_price=prices[n-1]
+        for i in range(n-2,-1,-1):
+            max_price=max(max_price,prices[i])
+            tableRL[i]=max(tableRL[i+1],max_price-prices[i])    
+
+        maxP =0
+        for i in range(0, n, 1):
+            p = tableLR[i] + tableRL[i]
+            if p > maxP:
+                maxP = p
+
+        return maxP
+        #return max(tableLR[i] + tableRL[i] for i in range(n))
         #HW0406 : use two LUTs to save time complexity.
-        return -1
+        
 
     prices = [1, 3, 5, 4, 3, 7, 6, 9, 2, 4]
     print("max profit : %d (ans 10)\n\n" % maxProfitAlt(prices))
@@ -168,6 +193,7 @@ def leetcode_stock_trade_i():
 
     # time complexity : O(N^2)
     # space complexity : O
+    
     def maxProfit(prices):
         # HW0329
         # prices = [7, 1, 5, 3, 6, 4]
@@ -176,16 +202,14 @@ def leetcode_stock_trade_i():
         for k in range(0, N - 1, 1):
             for j in range(k + 1, N, 1):
                 profits.append(prices[j] - prices[k])
-
         maxP = max(profits)
-
         return 0 if maxP < 0 else maxP
 
         # if maxP<0:
         #     return 0
         # else:
         #     return maxP
-
+    
     prices = [7, 1, 5, 3, 6, 4]
     print("max profit : %d (ans 5)\n" % maxProfit(prices))
 
@@ -211,7 +235,7 @@ def leetcode_stock_trade_i():
             if prices[i] - min_price > maxP:
                 maxP = prices[i] - min_price
         return maxP
-
+    
     prices = [7, 1, 5, 3, 6, 4]
     print("max profit : %d (ans 5)\n" % maxProfitAlt(prices))
 
@@ -1177,12 +1201,12 @@ def basic_call_by_reference():
     c = my_sum(a, b)
     print(c)
 
-    print("------ call by reference --------")
+    print("------ call by reference : full- permission--------")
 
     def my_append_minus_one(x):  # x = a <== shallow copy
-        x = x + [-1]  # 拆掉重蓋  (X) 
+        #x = x + [-1]  # 拆掉重蓋  (X) 
         #x += [-1]    #加蓋     (O)
-        #x.append(-1) #加蓋     (O)
+        x.append(-1) #加蓋     (O)
         print("x = %s" % x)
 
     # Q : give list "a", append -1 to a using function
@@ -1191,6 +1215,96 @@ def basic_call_by_reference():
     my_append_minus_one(a)
     print("after : %s" % a)  # [3, 0, -1]
 
-    print("------ function call - full permission --------")
     print("------ function call - deep copy + full permission --------")
+
+    # Q : give list "a", append -1 to a using function
+    a = [3, 0] #<== mutable <== copy: shallow copy
+    print("before : %s" % a)
+
+    #b = list(a)
+    b= a[:]
+    #b = [x for x in a]
+    
+    my_append_minus_one(b)
+    print("after : %s" % a)  # [3, 0, -1]
+
+    print("---- tuple -----")
+    #name = "John" #<== immutable
+    #name[0]= 'Y' #<= 
+    
+    x = [1, 3] #<== mutable
+    x = (1, 3) #<== tuple -< immutable
+    
     print("------ function call - read only --------")
+    a = [3, 0] #<== mutable <== copy: shallow copy
+    print("before : %s" % a)
+
+    b= tuple(a) # [3, 0] => (3, 0)
+
+    #my_append_minus_one(b)
+    print("after : %s" % a)  # [3, 0, -1]
+
+
+def basic_string_ascii():
+    '''
+    ASCII table : look-up-table for # -> bitmap on screen
+      ==> 128 codes to inidicate the keyboard output for "one input" 
+      https://www.asciitable.com/
+
+
+    7-bit for 128 signals => 
+
+    -128....0..... 127 <== 8 bit <== 1 byte
+            ^^^^^^^^^^
+             ASCII
+    '''
+    print("------ charactor -> ASCII code----")
+    #   ord(charactor) => ascii code
+    print(ord("a"))
+
+    print("------ ASCII code -> charactor ----")
+    #   chr(ascii code) => charactor (string)
+    print(chr(99))
+
+    #Q: if the index of "a" is 0, what is the alphabet with index = 19
+    c = chr(ord("a")+19)
+    print(c)
+    
+    
+
+
+def leetcode_alphabet_histogram():
+    '''
+    Q: Given a string ss, find the histogram of lower-case alphabet. Print out the results     in alphabet order.
+
+    a 1
+    b 2
+    k 1
+    u 2
+    
+    '''
+    ss = "    u...ka*^b$(b)    u...."
+
+    #HW0409 : target compplexity: O(N)
+    
+    return
+
+
+
+def basic_dict():
+
+    '''
+    search
+
+               time complexity       memory order       space complexity
+    list        O(N)                   YES              O(1)
+    dict        O(1)                   No               O(N)
+                                      ^^^^^ for (X)     ^^^^^
+     pair :  key <--> value
+             name     face
+
+    HW0409(VK): start from next time    
+    '''
+    
+
+    return

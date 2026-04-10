@@ -5,7 +5,7 @@ from basics import *
 
 if __name__ == "__main__":
     # special meaning for Python execution, but we will talk about it later.
-    testID = 20
+    testID = 21
 
     if testID == 0:
         print("hello World")
@@ -45,6 +45,12 @@ if __name__ == "__main__":
         basic_list_iii() # :
     elif testID == 20:
         basic_call_by_reference() # call by reference, call by value
+    elif testID == 21:
+        basic_string_ascii() # string, ascii
+    elif testID == 22:
+        leetcode_alphabet_histogram()
+    elif testID == 23:
+        basic_dict() #dict, look-up table (LUT)
     else:
         print("Not a supported testID = %d" % (testID))
 
@@ -52,10 +58,8 @@ if __name__ == "__main__":
 """
 ------- basic level -------
 Part 1/3 - basics
-- sliding window ii <== HW0406
-- call-by-reference, call-by-value
-- string, ASCII code, KES
-- leetcode : histogram ii
+- string, ASCII code, KES 
+- leetcode : histogram ii <== HW
 
 
 Part 2/3 - basic algorithms

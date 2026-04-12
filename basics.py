@@ -50,7 +50,7 @@ def leetcode_stock_trade_iii():
     """
 
     def deriveProfit(prices):
-        t =0
+        t = 0
         maxP = 0
         for h in range(1, len(prices), 1):
             if prices[h] >= prices[t]:
@@ -63,7 +63,7 @@ def leetcode_stock_trade_iii():
 
     def maxProfit(prices):
         # time complexity : O(N^2)
-        # space complexity : O(1) 
+        # space complexity : O(1)
 
         n = len(prices)
         maxP = 0
@@ -90,7 +90,7 @@ def leetcode_stock_trade_iii():
     print("max profit : %d (ans 0)\n\n" % maxProfit(prices))
 
     print("-------- v1 : O(N) ------------")
-    '''
+    """
     f({a, b, c, d}) =max{  
                            f({})           + f({a,b, c, d})
                            f({a})          +   f({b, c, d}),
@@ -107,35 +107,34 @@ def leetcode_stock_trade_iii():
 
     #Step 3: for loop to loop all combinations
     
-    '''
+    """
 
     def maxProfitAlt(prices):
         # time complexity : O(N)
-        # space complexity : O(N) 
+        # space complexity : O(N)
 
-        n=len(prices)
-        tableLR=[0]*n
-        min_price=prices[0]
-        for i in range(1,n):
-            min_price=min(min_price,prices[i])
-            tableLR[i]=max(tableLR[i-1],prices[i]-min_price)
-        
-        tableRL=[0]*n
-        max_price=prices[n-1]
-        for i in range(n-2,-1,-1):
-            max_price=max(max_price,prices[i])
-            tableRL[i]=max(tableRL[i+1],max_price-prices[i])    
+        n = len(prices)
+        tableLR = [0] * n
+        min_price = prices[0]
+        for i in range(1, n):
+            min_price = min(min_price, prices[i])
+            tableLR[i] = max(tableLR[i - 1], prices[i] - min_price)
 
-        maxP =0
+        tableRL = [0] * n
+        max_price = prices[n - 1]
+        for i in range(n - 2, -1, -1):
+            max_price = max(max_price, prices[i])
+            tableRL[i] = max(tableRL[i + 1], max_price - prices[i])
+
+        maxP = 0
         for i in range(0, n, 1):
             p = tableLR[i] + tableRL[i]
             if p > maxP:
                 maxP = p
 
         return maxP
-        #return max(tableLR[i] + tableRL[i] for i in range(n))
-        #HW0406 : use two LUTs to save time complexity.
-        
+        # return max(tableLR[i] + tableRL[i] for i in range(n))
+        # HW0406 : use two LUTs to save time complexity.
 
     prices = [1, 3, 5, 4, 3, 7, 6, 9, 2, 4]
     print("max profit : %d (ans 10)\n\n" % maxProfitAlt(prices))
@@ -193,7 +192,7 @@ def leetcode_stock_trade_i():
 
     # time complexity : O(N^2)
     # space complexity : O
-    
+
     def maxProfit(prices):
         # HW0329
         # prices = [7, 1, 5, 3, 6, 4]
@@ -209,7 +208,7 @@ def leetcode_stock_trade_i():
         #     return 0
         # else:
         #     return maxP
-    
+
     prices = [7, 1, 5, 3, 6, 4]
     print("max profit : %d (ans 5)\n" % maxProfit(prices))
 
@@ -235,7 +234,7 @@ def leetcode_stock_trade_i():
             if prices[i] - min_price > maxP:
                 maxP = prices[i] - min_price
         return maxP
-    
+
     prices = [7, 1, 5, 3, 6, 4]
     print("max profit : %d (ans 5)\n" % maxProfitAlt(prices))
 
@@ -370,7 +369,7 @@ def basic_time_complexity():
 def basic_while_loop():
     """
     for : very useful to "one container" loop structure
-        for x in [.....]  : stop when all elements were iterated
+        for x in [.....] : stop when all elements were iterated
 
     while : general purpose loop structure
         while "satisfied condition" :
@@ -391,6 +390,7 @@ def basic_while_loop():
     print("----")
 
     # Q: find the maximum of the list "nums", use "while"
+
     nums = [3, 1, 5, 4, 2]
     i = 0
     max_value = nums[0]
@@ -417,15 +417,16 @@ def basic_for_loop():
     print("------------")
     a = [3, 1, 5, 4, 2]
     #   0  1  2  3  4
+
     # Q: Reset all elements to -1
     # a = [-1, -1, -1, -1, -1]
+
     for i in [0, 1, 2, 3, 4]:
         a[i] = -1
     print(a)
 
     # Q: Give a list a, find the maximum value.
-    a = [5, 1, 4, 2, 7, 5]
-    # NOTE : size of a is fixed number 6
+    a = [3, 1, 5, 4, 2]
     max_value = a[0]
     for x in a:
         if max_value < x:
@@ -433,7 +434,9 @@ def basic_for_loop():
     print(max_value)
 
     # Q: sum up all eleemnts in a, and print out the sum value
+
     a = [-1, 3, 0, 2, 5]
+
     sum = 0
     for x in a:
         sum = sum + x
@@ -445,7 +448,7 @@ def basic_for_loop():
     print(sum)
 
     # Q: Give a list a, find the minimum value.
-    a = [-1, 3, 0, 2, 5]
+
     min_value = a[0]
     for x in a:
         if x < min_value:
@@ -533,6 +536,23 @@ def leetcode_merge_two_sorted_lists():
     j = 0
     while i < len(a) and j < len(b):
         if a[i] < b[j]:
+            c.append(a[i])
+            i = i + 1
+        else:
+            c.append(b[j])
+            j = j + 1
+    while i < len(a):
+        c.append(a[i])
+        i = i + 1
+    while j < len(b):
+        c.append(b[j])
+        j = j + 1
+
+    print(c)
+    """
+    
+    while i < len(a) and j < len(b):
+        if a[i] < b[j]:
             c += [a[i]]
             i = i + 1
         else:
@@ -545,6 +565,7 @@ def leetcode_merge_two_sorted_lists():
         c += [b[j]]
         j = j + 1
     print(c)
+    """
     # b[0]<a[0]-->b[0]   []
     # b[1]<a[0]-->b[1]
     # a[0]<b[2]-->a[0]
@@ -604,14 +625,22 @@ def leetcode_merge_two_sorted_lists():
     c = []
     # c=> [0, 1, 2, 3, 4, 5, 6, 7, 8]
     # HW0326
-
+    while len(a) != 0 or len(b) != 0:
+        if (len(a) != 0 and len(b) != 0 and b[0] < a[0]) or len(b) != 0:
+            c.append(b[0])
+            b.pop(0)
+        else:
+            c.append(a[0])
+            a.pop(0)
+    print(c)
+    """
     while len(a) != 0 or len(b) != 0:
         if (len(a) != 0 and len(b) != 0 and a[0] < b[0]) or len(b) == 0:
             c.append(a.pop(0))
         else:
             c.append(b.pop(0))
     print(c)
-
+    """
     print("------- v4 -  ---------")
 
     """
@@ -668,7 +697,6 @@ def leetcode_shuffle_two_lists():
     b = [9, 6, 1, 0]
     # => c=[3, 9, 5, 6, 1, 1, 4, 0]
     c = []
-
     i = 0
     while i < len(a):
         c += [a[i]]
@@ -714,7 +742,6 @@ def leetcode_shuffle_two_lists():
             i += 1
 
     print(c)
-
     print("------- v1.1 ---------")
     """
     True or True => True
@@ -730,7 +757,20 @@ def leetcode_shuffle_two_lists():
     a = [3, 5, 1, 4]
     b = [9, 6, 1, 0, 8, -1]
     c = []
-
+    i = 0
+    j = 0
+    while i < len(a) and j < len(b):
+        c += [a[i]]
+        c += [b[j]]
+        i = i + 1
+        j = j + 1
+    while i < len(a):
+        c += [a[i]]
+        i = i + 1
+    while j < len(b):
+        c += [b[j]]
+        j = j + 1
+    """    
     i = 0  # for counting a
     j = 0  # for counting b
     # or , and
@@ -745,7 +785,7 @@ def leetcode_shuffle_two_lists():
             # take b
             c += [b[j]]
             j += 1
-
+    """
     print(c)
 
     print("------- v2 ---------")
@@ -812,6 +852,7 @@ def basic_list_i():
 def leetcode_find_max():
     # Q: find the maximum value in a given list "a"
     a = [3, 6, -1, 7, 5, 4]
+
     max_value = a[0]  # in-function global variable
     for x in a:
         if x > max_value:
@@ -880,6 +921,7 @@ def leetcode_bubble_sort():
           k...
     #HW0325    
     """
+
     # time complexity : O(N^2) => optimal sorting algorithm O(N logN) => .sort()
     for n in range(N, 1, -1):  # N
         for k in range(0, n - 1, 1):  # N
@@ -968,7 +1010,6 @@ def leetcode_numbers_histogram():
 
     # HW0326 : 2-step approach
     c = [0] * 10
-
     # Step 0 : gather statistics
     for x in nums:  # O(N)
         c[x] += 1
@@ -1204,13 +1245,13 @@ def basic_call_by_reference():
     print("------ call by reference : full- permission--------")
 
     def my_append_minus_one(x):  # x = a <== shallow copy
-        #x = x + [-1]  # 拆掉重蓋  (X) 
-        #x += [-1]    #加蓋     (O)
-        x.append(-1) #加蓋     (O)
+        # x = x + [-1]  # 拆掉重蓋  (X)
+        # x += [-1]    #加蓋     (O)
+        x.append(-1)  # 加蓋     (O)
         print("x = %s" % x)
 
     # Q : give list "a", append -1 to a using function
-    a = [3, 0] #<== mutable <== copy: shallow copy
+    a = [3, 0]  # <== mutable <== copy: shallow copy
     print("before : %s" % a)
     my_append_minus_one(a)
     print("after : %s" % a)  # [3, 0, -1]
@@ -1218,46 +1259,46 @@ def basic_call_by_reference():
     print("------ function call - deep copy + full permission --------")
 
     # Q : give list "a", append -1 to a using function
-    a = [3, 0] #<== mutable <== copy: shallow copy
+    a = [3, 0]  # <== mutable <== copy: shallow copy
     print("before : %s" % a)
 
-    #b = list(a)
-    b= a[:]
-    #b = [x for x in a]
-    
+    # b = list(a)
+    b = a[:]
+    # b = [x for x in a]
+
     my_append_minus_one(b)
     print("after : %s" % a)  # [3, 0, -1]
 
     print("---- tuple -----")
-    #name = "John" #<== immutable
-    #name[0]= 'Y' #<= 
-    
-    x = [1, 3] #<== mutable
-    x = (1, 3) #<== tuple -< immutable
-    
+    # name = "John" #<== immutable
+    # name[0]= 'Y' #<=
+
+    x = [1, 3]  # <== mutable
+    x = (1, 3)  # <== tuple -< immutable
+
     print("------ function call - read only --------")
-    a = [3, 0] #<== mutable <== copy: shallow copy
+    a = [3, 0]  # <== mutable <== copy: shallow copy
     print("before : %s" % a)
 
-    b= tuple(a) # [3, 0] => (3, 0)
+    b = tuple(a)  # [3, 0] => (3, 0)
 
-    #my_append_minus_one(b)
+    # my_append_minus_one(b)
     print("after : %s" % a)  # [3, 0, -1]
 
 
 def basic_string_ascii():
-    '''
+    """
     ASCII table : look-up-table for # -> bitmap on screen
-      ==> 128 codes to inidicate the keyboard output for "one input" 
+      ==> 128 codes to inidicate the keyboard output for "one input"
       https://www.asciitable.com/
 
 
-    7-bit for 128 signals => 
+    7-bit for 128 signals =>
 
     -128....0..... 127 <== 8 bit <== 1 byte
             ^^^^^^^^^^
              ASCII
-    '''
+    """
     print("------ charactor -> ASCII code----")
     #   ord(charactor) => ascii code
     print(ord("a"))
@@ -1266,34 +1307,38 @@ def basic_string_ascii():
     #   chr(ascii code) => charactor (string)
     print(chr(99))
 
-    #Q: if the index of "a" is 0, what is the alphabet with index = 19
-    c = chr(ord("a")+19)
+    # Q: if the index of "a" is 0, what is the alphabet with index = 19
+    c = chr(ord("a") + 19)
     print(c)
-    
-    
 
 
 def leetcode_alphabet_histogram():
-    '''
+    """
     Q: Given a string ss, find the histogram of lower-case alphabet. Print out the results     in alphabet order.
 
     a 1
     b 2
     k 1
     u 2
-    
-    '''
-    ss = "    u...ka*^b$(b)    u...."
 
-    #HW0409 : target compplexity: O(N)
-    
+    """
+    ss = "    u...ka*^b$(b)    u...."
+    a = [0] * 26
+    for x in ss:
+        for i in range(97, 123, 1):
+            if x == chr(i):
+                a[i - 97] += 1
+    for i in range(26):
+        if a[i] > 0:
+            print(chr(i + 97), ":", a[i])
+
+    # HW0409 : target compplexity: O(N)
+
     return
 
 
-
 def basic_dict():
-
-    '''
+    """
     search
 
                time complexity       memory order       space complexity
@@ -1303,8 +1348,7 @@ def basic_dict():
      pair :  key <--> value
              name     face
 
-    HW0409(VK): start from next time    
-    '''
-    
+    HW0409(VK): start from next time
+    """
 
     return

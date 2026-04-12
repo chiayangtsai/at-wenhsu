@@ -5,7 +5,7 @@ from basics import *
 
 if __name__ == "__main__":
     # special meaning for Python execution, but we will talk about it later.
-    testID =22
+    testID =23
 
     if testID == 0:
         print("hello World")
@@ -48,7 +48,7 @@ if __name__ == "__main__":
     elif testID == 21:
         basic_string_ascii() # string, ascii
     elif testID == 22:
-        leetcode_alphabet_histogram()
+        leetcode_alphabet_histogram() #KES, LUT
     elif testID == 23:
         basic_dict() #dict, look-up table (LUT)
     else:
@@ -57,14 +57,10 @@ if __name__ == "__main__":
 
 """
 ------- basic level -------
-Part 1/3 - basics
-- string, ASCII code, KES 
-- leetcode : histogram ii <== HW
 
 
 Part 2/3 - basic algorithms
-- dict : look-up table (LUT) / Hash table
-- practice : two sum
+- practice : two sum  <==== HW0412(VK): start from here
 - leetcode : roman to integer, integer to roman
 - sliding window iii : longest sub string
 - digit : decimal

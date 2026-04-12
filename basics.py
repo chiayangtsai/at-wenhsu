@@ -1321,20 +1321,42 @@ def leetcode_alphabet_histogram():
     k 1
     u 2
 
-    """
+    """    
     ss = "    u...ka*^b$(b)    u...."
-    a = [0] * 26
-    for x in ss:
-        for i in range(97, 123, 1):
-            if x == chr(i):
-                a[i - 97] += 1
-    for i in range(26):
-        if a[i] > 0:
-            print(chr(i + 97), ":", a[i])
 
     # HW0409 : target compplexity: O(N)
 
-    return
+    #time complexity  : O(N)
+    #space complexity : O(1)
+
+    '''
+     LUT : key : charactor   value: show times
+                 ^^^^^^^^          ^^^^^^^^^^
+                  => ASCII -> 0-25    
+                  
+    KES algorithm 
+    '''
+    
+    a = [0] * 26
+    # for x in ss: # N
+    #     for i in range(ord("a"), ord("z")+1): #1
+    #         if x == chr(i):
+    #             a[i - ord("a")] += 1
+
+    for x in ss: #N
+        if ord(x) >= ord("a") and ord(x) <= ord("z"):
+            a[ord(x) - ord("a")] += 1
+    
+                
+    for i in range(26): #1
+        if a[i] > 0:
+            print(chr(i + ord("a")), a[i])
+
+    print("---------- dict ------------")
+    ss = "    u...ka*^b$(b)    u...."
+    #HW0412
+    tab = {} #key: charactor , value: show times
+    
 
 
 def basic_dict():
@@ -1347,8 +1369,101 @@ def basic_dict():
                                       ^^^^^ for (X)     ^^^^^
      pair :  key <--> value
              name     face
-
-    HW0409(VK): start from next time
+ 
+     key characteristics:
+            key MUST be immutable variable   
+            e.g.  list (X) => convert to tuple (O)
+            
     """
 
-    return
+    # naming example : tab, memo ...
+
+    # key : name, value : score
+    tab = {"John":90, "Mary":95, "Jason":96, "Apple":75, "Aaron":99 }
+
+    #Q: add new data , "Ted" with score 85
+    # .append() (X)
+    tab["Ted"] = 85
+    print(tab)
+
+    #Q: print out Mary's score
+    print(tab["Mary"])
+    
+    print("------ search ------------")
+    #Q: find if "Jason" is in the tab
+    key = "Jason"
+    if key in tab: #O(1)
+        print("%s %d" % (key, tab[key]))
+
+
+    print("=== example ==")
+    nums = [3, 1, 5, 4, 2]
+    #Q: find if 3 in nums
+    for x in nums: # O(N)
+        if x == 3:
+            print("YES")
+            break
+
+    if 0 not in nums: #O(N)
+        print("YES, not in")
+    
+    print("------ .keys() ------------")
+    tab = {"John":90, "Mary":95, "Jason":96, "Apple":75, "Aaron":99 }
+    #Q: print out all names in tab
+    keyList = list(tab.keys())
+    print(keyList)
+    
+
+    print("------ dict -> list concept, for loop ------------")
+    '''
+    Q: print out all data in the following format
+    John-90
+    Mary-95
+    Jason-96
+    Apple-75
+    Aaron-99    
+    '''
+    for x in tab.keys(): #['John', 'Mary', 'Jason', 'Apple', 'Aaron']
+        print("%s-%d" %(x,tab[x]))
+
+
+    print("------ erase ------------")
+    '''
+    list:
+       .pop(index)
+
+       del a[index]
+
+    list:
+       .pop(key)
+    
+       del a[key]
+    
+    '''
+
+    
+    tab = {"John":90, "Mary":95, "Jason":96, "Apple":75, "Aaron":99 }
+    #Q: erase "Jason" data
+    if "Jason" in tab: #O(1)
+        tab.pop("Jason") #O(1)
+    print(tab)
+    
+    print("------ .items() ------------")
+    tab = {"John":90, "Mary":95, "Jason":96, "Apple":75, "Aaron":99 }
+    itemList = list(tab.items())
+    print(itemList) #[('John', 90), ('Mary', 95), ('Jason', 96), ('Apple', 75), ('Aaron', 99)]
+
+    '''
+    Q: print out all data in the following format
+    John-90
+    Mary-95
+    Jason-96
+    Apple-75
+    Aaron-99    
+    '''
+    for x in tab.items(): #[('John', 90), ('Mary', 95), ('Jason', 96), ('Apple', 75), ('Aaron', 99)]
+        print("%s-%d" %(x[0],x[1]))
+    print("==")
+    for name,score in tab.items(): #<== most recommended
+        print("%s-%d" %(name,score))
+

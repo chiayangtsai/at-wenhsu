@@ -1321,42 +1321,59 @@ def leetcode_alphabet_histogram():
     k 1
     u 2
 
-    """    
+    """
     ss = "    u...ka*^b$(b)    u...."
 
     # HW0409 : target compplexity: O(N)
 
-    #time complexity  : O(N)
-    #space complexity : O(1)
+    # time complexity  : O(N)
+    # space complexity : O(1)
 
-    '''
+    """
      LUT : key : charactor   value: show times
                  ^^^^^^^^          ^^^^^^^^^^
                   => ASCII -> 0-25    
                   
     KES algorithm 
-    '''
-    
+    """
+
     a = [0] * 26
     # for x in ss: # N
     #     for i in range(ord("a"), ord("z")+1): #1
     #         if x == chr(i):
     #             a[i - ord("a")] += 1
 
-    for x in ss: #N
+    for x in ss:  # N
         if ord(x) >= ord("a") and ord(x) <= ord("z"):
             a[ord(x) - ord("a")] += 1
-    
-                
-    for i in range(26): #1
+
+    for i in range(26):  # 1
         if a[i] > 0:
             print(chr(i + ord("a")), a[i])
 
     print("---------- dict ------------")
-    ss = "    u...ka*^b$(b)    u...."
-    #HW0412
-    tab = {} #key: charactor , value: show times
+    """
+    .sort()
+    sorted()   => time complexity O(N logN)
     
+    
+    """
+    ss = "    u...ka*^b$(b)    u...."
+    # HW0412
+    tab = {}
+    for x in ss:
+        if ord("a") <= ord(x) <= ord("z"):
+            if x not in tab:
+                tab[x] = 1
+            else:
+                tab[x] += 1
+    # for a,b in sorted(tab.items()):
+    #     print("%s %d" %(a,b))
+    # key: charactor, value: show times
+    for i in range(ord("a"), ord("z") + 1):  # O(1)
+        ch = chr(i)
+        if ch in tab:
+            print("%s %d" % (ch, tab[ch]))
 
 
 def basic_dict():
@@ -1369,66 +1386,63 @@ def basic_dict():
                                       ^^^^^ for (X)     ^^^^^
      pair :  key <--> value
              name     face
- 
+
      key characteristics:
-            key MUST be immutable variable   
+            key MUST be immutable variable
             e.g.  list (X) => convert to tuple (O)
-            
+
     """
 
     # naming example : tab, memo ...
 
     # key : name, value : score
-    tab = {"John":90, "Mary":95, "Jason":96, "Apple":75, "Aaron":99 }
+    tab = {"John": 90, "Mary": 95, "Jason": 96, "Apple": 75, "Aaron": 99}
 
-    #Q: add new data , "Ted" with score 85
+    # Q: add new data , "Ted" with score 85
     # .append() (X)
     tab["Ted"] = 85
     print(tab)
 
-    #Q: print out Mary's score
+    # Q: print out Mary's score
     print(tab["Mary"])
-    
-    print("------ search ------------")
-    #Q: find if "Jason" is in the tab
-    key = "Jason"
-    if key in tab: #O(1)
-        print("%s %d" % (key, tab[key]))
 
+    print("------ search ------------")
+    # Q: find if "Jason" is in the tab
+    key = "Jason"
+    if key in tab:  # O(1)
+        print("%s %d" % (key, tab[key]))
 
     print("=== example ==")
     nums = [3, 1, 5, 4, 2]
-    #Q: find if 3 in nums
-    for x in nums: # O(N)
+    # Q: find if 3 in nums
+    for x in nums:  # O(N)
         if x == 3:
             print("YES")
             break
 
-    if 0 not in nums: #O(N)
+    if 0 not in nums:  # O(N)
         print("YES, not in")
-    
+
     print("------ .keys() ------------")
-    tab = {"John":90, "Mary":95, "Jason":96, "Apple":75, "Aaron":99 }
-    #Q: print out all names in tab
+    tab = {"John": 90, "Mary": 95, "Jason": 96, "Apple": 75, "Aaron": 99}
+    # Q: print out all names in tab
     keyList = list(tab.keys())
     print(keyList)
-    
 
     print("------ dict -> list concept, for loop ------------")
-    '''
+    """
     Q: print out all data in the following format
     John-90
     Mary-95
     Jason-96
     Apple-75
     Aaron-99    
-    '''
-    for x in tab.keys(): #['John', 'Mary', 'Jason', 'Apple', 'Aaron']
-        print("%s-%d" %(x,tab[x]))
-
+    """
+    for x in tab.keys():  # ['John', 'Mary', 'Jason', 'Apple', 'Aaron']
+        print("%s-%d" % (x, tab[x]))
 
     print("------ erase ------------")
-    '''
+    """
     list:
        .pop(index)
 
@@ -1439,31 +1453,132 @@ def basic_dict():
     
        del a[key]
     
-    '''
+    """
 
-    
-    tab = {"John":90, "Mary":95, "Jason":96, "Apple":75, "Aaron":99 }
-    #Q: erase "Jason" data
-    if "Jason" in tab: #O(1)
-        tab.pop("Jason") #O(1)
+    tab = {"John": 90, "Mary": 95, "Jason": 96, "Apple": 75, "Aaron": 99}
+    # Q: erase "Jason" data
+    if "Jason" in tab:  # O(1)
+        tab.pop("Jason")  # O(1)
     print(tab)
-    
-    print("------ .items() ------------")
-    tab = {"John":90, "Mary":95, "Jason":96, "Apple":75, "Aaron":99 }
-    itemList = list(tab.items())
-    print(itemList) #[('John', 90), ('Mary', 95), ('Jason', 96), ('Apple', 75), ('Aaron', 99)]
 
-    '''
+    print("------ .items() ------------")
+    tab = {"John": 90, "Mary": 95, "Jason": 96, "Apple": 75, "Aaron": 99}
+    itemList = list(tab.items())
+    print(
+        itemList
+    )  # [('John', 90), ('Mary', 95), ('Jason', 96), ('Apple', 75), ('Aaron', 99)]
+
+    """
     Q: print out all data in the following format
     John-90
     Mary-95
     Jason-96
     Apple-75
     Aaron-99    
-    '''
-    for x in tab.items(): #[('John', 90), ('Mary', 95), ('Jason', 96), ('Apple', 75), ('Aaron', 99)]
-        print("%s-%d" %(x[0],x[1]))
+    """
+    for x in (
+        tab.items()
+    ):  # [('John', 90), ('Mary', 95), ('Jason', 96), ('Apple', 75), ('Aaron', 99)]
+        print("%s-%d" % (x[0], x[1]))
     print("==")
-    for name,score in tab.items(): #<== most recommended
-        print("%s-%d" %(name,score))
+    for name, score in tab.items():  # <== most recommended
+        print("%s-%d" % (name, score))
 
+
+def leetcode_two_sum():
+    # time complexity : O(N)
+    nums = [1, 4, 7, 6, 0, 4, 3, 6, 7, 2]
+    target = 10
+
+    """
+    4 6
+    7 3
+    """
+    # time complexity : O(N^2)
+    # space complexity : O(N)
+    tab = {}  # key: tuple pair     value: X
+    for i in range(0, len(nums) - 1):
+        for j in range(i + 1, len(nums)):
+            if nums[i] + nums[j] == target and (nums[i], nums[j]) not in tab:
+                tab[(nums[i], nums[j])] = 1
+                tab[(nums[j], nums[i])] = 1
+                print("%d %d" % (nums[i], nums[j]))
+
+    print("------ O(N) ---------")
+    nums = [1, 4, 7, 6, 0, 6, 4, 3, 7, 2]
+    target = 10
+    tab = {}  # key : number    value: X
+    # Step 1: collect statistics
+    for x in nums:
+        tab[x] = 1
+
+    print(tab)
+    # Step 2: analyze the raw data with statistics (or directly use the statisitcs)
+    for x in nums:
+        if target - x in tab:
+            print("%d %d" % (target - x, x))
+            tab.pop(target - x)
+            tab.pop(x)
+
+    
+    print("------ O(N) ---------")
+    #HW0416
+    nums = [1, 4, 7, 6, 5, 0, 5, 6, 4, 3, 7, 2]
+    target = 10
+    # tab = {}  # key : number    value: X
+    # # Step 1: collect statistics
+    # for x in nums:
+    #     tab[x] = 1
+    
+    # print(tab)
+    # # Step 2: analyze the raw data with statistics (or directly use the statisitcs)
+    # for x in nums:
+    #     if target - x in tab:
+    #         print("%d %d" % (target - x, x))
+    #         tab.pop(target - x)
+    #         tab.pop(x)
+
+
+
+def basic_decimal_digit():
+
+    
+    '''
+    526 = 5(10^2) +  2(10^1)  + 6(10^0)
+
+
+                              
+    get last digit  (6) :   % 10 (餘數)
+    shift right    (52) :  // 10  (商數)
+    shift left   (5260) :   * 10
+        
+    '''
+
+
+    '''    
+    
+     - -    ---
+     ---    ---
+     - -    ---
+     010    111 
+      2      7
+
+
+    12 = 8 + 4 = 1(2^3)  + 1(2^2) + 0(2^1) + 0(2^0) => 1 1 0 0  
+
+    '''
+
+    return 
+
+
+def leetcode_reverse_digits():
+
+    def getReversedNum(x):
+        #HW0416
+        return -1 #TBD
+
+    num = 52786
+    # => 68725
+
+    print("%d -> %d" % ( num  , getReversedNum(num) ))
+    

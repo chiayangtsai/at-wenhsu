@@ -5,7 +5,7 @@ from basics import *
 
 if __name__ == "__main__":
     # special meaning for Python execution, but we will talk about it later.
-    testID =23
+    testID =24
 
     if testID == 0:
         print("hello World")
@@ -51,6 +51,12 @@ if __name__ == "__main__":
         leetcode_alphabet_histogram() #KES, LUT
     elif testID == 23:
         basic_dict() #dict, look-up table (LUT)
+    elif testID == 24:
+        leetcode_two_sum() 
+    elif testID == 30:
+        basic_decimal_digit() #deciaml
+    elif testID == 31:
+        leetcode_reverse_digits()
     else:
         print("Not a supported testID = %d" % (testID))
 
@@ -60,7 +66,7 @@ if __name__ == "__main__":
 
 
 Part 2/3 - basic algorithms
-- practice : two sum  <==== HW0412(VK): start from here
+- practice : two sum  <==== HW0416
 - leetcode : roman to integer, integer to roman
 - sliding window iii : longest sub string
 - digit : decimal

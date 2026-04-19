@@ -1520,16 +1520,39 @@ def leetcode_two_sum():
             tab.pop(target - x)
             tab.pop(x)
 
-    
     print("------ O(N) ---------")
-    #HW0416
-    nums = [1, 4, 7, 6, 5, 0, 5, 6, 4, 3, 7, 2]
+    # HW0416
+    nums = [1, 4, 7, 6, 5, 0, 5, 6, 4, 5, 3, 7, 2]
     target = 10
+    tab = {}
+    for x in nums:
+        if x not in tab:
+            tab[x] = 1
+        else:
+            tab[x] += 1
+
+    print(tab)
+    # Step 2: analyze the raw data with statistics (or directly use the statisitcs)
+    for x in nums:
+        # exception
+        if target - x not in tab:
+            continue
+
+        # general
+        if x == target - x and tab[x] >= 2:
+            print("%d %d" % (target - x, x))
+            tab.pop(target - x)
+
+        elif x != target - x:
+            print("%d %d" % (target - x, x))
+            tab.pop(target - x)
+            tab.pop(x)
+
     # tab = {}  # key : number    value: X
     # # Step 1: collect statistics
     # for x in nums:
     #     tab[x] = 1
-    
+
     # print(tab)
     # # Step 2: analyze the raw data with statistics (or directly use the statisitcs)
     # for x in nums:
@@ -1539,23 +1562,19 @@ def leetcode_two_sum():
     #         tab.pop(x)
 
 
-
 def basic_decimal_digit():
-
-    
-    '''
+    """
     526 = 5(10^2) +  2(10^1)  + 6(10^0)
 
 
-                              
+
     get last digit  (6) :   % 10 (餘數)
     shift right    (52) :  // 10  (商數)
     shift left   (5260) :   * 10
-        
-    '''
 
+    """
 
-    '''    
+    """    
     
      - -    ---
      ---    ---
@@ -1566,19 +1585,152 @@ def basic_decimal_digit():
 
     12 = 8 + 4 = 1(2^3)  + 1(2^2) + 0(2^1) + 0(2^0) => 1 1 0 0  
 
-    '''
+    """
 
-    return 
+    return
 
 
 def leetcode_reverse_digits():
+    """
+    52786
+    5278
+    527
+    52
+    5
+    0
 
-    def getReversedNum(x):
-        #HW0416
-        return -1 #TBD
+
+
+    """
+
+    def getReversedNum(x):  # x is the input
+        # 52786 -> 68725
+        res = ""
+        while x > 0:
+            a = str(x)  # "52786"
+            res += a[-1]
+            x = x // 10
+        return int(res)  # TBD
 
     num = 52786
     # => 68725
 
-    print("%d -> %d" % ( num  , getReversedNum(num) ))
+    print("%d -> %d" % (num, getReversedNum(num)))
+
+    print("------ string (python specific) -------")
+
+    def getReversedNumStr(x):  # x is the input
+        return int(str(x)[::-1])
+
+    num = 52786
+    # => 68725
+
+    print("%d -> %d" % (num, getReversedNumStr(num)))
+
+    print("------ digit processing ----")
+
+    def getReversedNumD(x):  # x is the input
+        # 52786 -> 68725
+        res = 0
+        while x > 0:
+            lastDigit = x % 10
+            res = res * 10 + lastDigit
+            x = x // 10
+        return res  # TBD
+
+    num = 52786
+    # => 68725
+
+    print("%d -> %d" % (num, getReversedNumD(num)))
+
+
+def leetcode_even_odd_diff():
+    # APCS 2017
+
+    """
+    7682  => |(7+8) - (6+2) | = 7
+     ^ ^
+
+    131  => |(1+1) - 3| = 1
+
+    """
+
+    def getEvenOddDiff(x):
+        #HW0419
+        return -1 # TBD
+
+    num = 7682
+    print("%d -> %d (ans 7)" % (num, getEvenOddDiff(num)))
+
+    num = 131
+    print("%d -> %d (ans 1)" % (num, getEvenOddDiff(num)))
     
+
+
+def leetcode_roman_integer():
+    # https://leetcode.com/problems/roman-to-integer/description/
+    """
+    Symbol       Value
+    I             1
+    V             5
+    X             10
+    L             50
+    C             100
+    D             500
+    M             1000
+
+
+    3 => III
+    4 => IV
+    5 => V
+    6 => VI
+    ...
+    9 => IX
+
+
+    49 => 40 + 9 => XLIX
+
+    74 => 70 +4 => LXXIV
+
+
+
+    """
+
+    def romanToInteger(s):
+        # HW0419
+        return -1  # TBD
+
+    s = "III"
+    print("%s->%d (ans: 3)" % (s, romanToInteger(s)))
+
+    s = "LVIII"
+    print("%s->%d (ans: 58)" % (s, romanToInteger(s)))
+
+    s = "MCMXCIV"
+    print("%s->%d (ans: 1994)" % (s, romanToInteger(s)))
+
+
+def basic_binary_digit():
+
+    '''
+    
+    12 = 8 + 4 = 1(2^3)  + 1(2^2) + 0(2^1) + 0(2^0) => 1 1 0 0  
+
+    1100 + 100
+
+       1 1 0 0    => 12
+     +   1 0 0    => 4
+     ----------
+    1  0 0 0 0    => 16
+
+
+    12 => 120 
+
+    8 -> 16  x 2
+    1000  10000
+
+
+    HW0419(VK) start from here next time.
+    '''
+
+    return 

@@ -1656,15 +1656,73 @@ def leetcode_even_odd_diff():
     """
 
     def getEvenOddDiff(x):
-        #HW0419
-        return -1 # TBD
+        # HW0419
+        odd = 0
+        even = 0
+        c = x
+        while x > 0:
+            lastDigit = x % 10
+            odd = odd + lastDigit
+            x = x // 100
+        c = c // 10
+        
+        while c > 0:
+            c_lastDigit = c % 10
+            even = even + c_lastDigit
+            c = c // 100
+
+        
+        return abs(odd - even)
+        # TBD
 
     num = 7682
     print("%d -> %d (ans 7)" % (num, getEvenOddDiff(num)))
 
     num = 131
     print("%d -> %d (ans 1)" % (num, getEvenOddDiff(num)))
+
+
+    print("----- alternative ----")
+    def getEvenOddDiffAlt(x):
+        diff =0
+        while x:
+            diff += x % 10            
+            x //= 10
+
+            diff -= x % 10            
+            x //= 10
+        return diff if diff > 0 else -diff
+
+    num = 7682 # |(7+8)- (6+2)| = | (7-6) + (8-2) |
+    print("%d -> %d (ans 7)" % (num, getEvenOddDiffAlt(num)))
+
+    num = 131
+    print("%d -> %d (ans 1)" % (num, getEvenOddDiffAlt(num)))
+
+def leetcode_integer_to_roman():
+    # https://leetcode.com/problems/integer-to-roman/description/
+    '''
+    Symbol       Value
+    I             1
+    V             5
+    X             10
+    L             50
+    C             100
+    D             500
+    M             1000
+
+    149 => 100 + 40 + 9 => CXLIX
     
+    '''
+    def intToRoman(num):
+        #HW0420
+        return "" #TBD
+
+    num = 58
+    print("%d => %s (ans: LVIII)" % (num, intToRoman(num)))
+    
+    num = 1994
+    print("%d => %s (ans: MCMXCIV)" % (num, intToRoman(num)))
 
 
 def leetcode_roman_integer():
@@ -1679,6 +1737,8 @@ def leetcode_roman_integer():
     D             500
     M             1000
 
+    #只有 1,10,100 這類符號會做前置減法；5,50,500 不會。
+    #合法減法只有六種 IV, IX, XL, XC, CD, CM
 
     3 => III
     4 => IV
@@ -1698,23 +1758,93 @@ def leetcode_roman_integer():
 
     def romanToInteger(s):
         # HW0419
-        return -1  # TBD
+        tab = {"I": 1, "V": 5, "X": 10, "L": 50, "C": 100, "D": 500, "M": 1000}
+        total = 0
+        for i in range(len(s) - 1):
+            if tab[s[i]] >= tab[s[i + 1]]:
+                total += tab[s[i]]
+
+            elif tab[s[i]] < tab[s[i + 1]]:
+                total -= tab[s[i]]
+
+        total += tab[s[-1]]
+        return total  # TBD
 
     s = "III"
     print("%s->%d (ans: 3)" % (s, romanToInteger(s)))
 
     s = "LVIII"
     print("%s->%d (ans: 58)" % (s, romanToInteger(s)))
-
     s = "MCMXCIV"
+    # s = "M   C   M    X   C     I  V"
+    #  1000 100  1000 10  100    1  5
     print("%s->%d (ans: 1994)" % (s, romanToInteger(s)))
 
 
-def basic_binary_digit():
+
+def leetcode_longest_substring_without_repeating():
+    '''
+    https://leetcode.com/problems/longest-substring-without-repeating-characters/
+    
+    Given a string s, find the length of the longest substring without repeating characters.
+    
+    
+    
+    Example 1:
+    
+    Input: s = "abcabcbb"
+    Output: 3
+    Explanation: The answer is "abc", with the length of 3.
+    
+    Example 2:
+    Input: s = "bbbbb"
+    Output: 1
+    Explanation: The answer is "b", with the length of 1.
+    
+    Example 3:
+    Input: s = "pwwkew"
+    Output: 3
+    Explanation: The answer is "wke", with the length of 3.
+    Notice that the answer must be a substring, "pwke" is a subsequence and not a substring.
+    
+    
+    Constraints:
+    
+    0 <= s.length <= 5 * 10^4
+    s consists of English letters, digits, symbols and spaces
+    '''
 
     '''
+          0 1 2 3 4 5 6 7 8 9
+          a b c a b c b b a c <== N
+                    h
+              t
+        l 1 2 3           2 3
+     maxl 1 2 3           3 3
     
-    12 = 8 + 4 = 1(2^3)  + 1(2^2) + 0(2^1) + 0(2^0) => 1 1 0 0  
+    '''
+    
+    def lengthOfLongestSubstring(ss):
+        #HW0420: at least O(N^2).  Optimal : O(N) - use dict to chractor <-> position
+        return -1 #TBD
+    
+    
+    ss = "abcabcbbac"
+    print("%s : %d (ans 3)" % (ss, lengthOfLongestSubstring(ss)))
+    
+    
+    ss = "bbbbb"
+    print("%s : %d (ans 1)" % (ss, lengthOfLongestSubstring(ss)))
+    
+    
+    ss = "pwwkew"
+    print("%s : %d (ans 3)" % (ss, lengthOfLongestSubstring(ss)))
+
+
+def basic_binary_digit():
+    """
+
+    12 = 8 + 4 = 1(2^3)  + 1(2^2) + 0(2^1) + 0(2^0) => 1 1 0 0
 
     1100 + 100
 
@@ -1724,13 +1854,54 @@ def basic_binary_digit():
     1  0 0 0 0    => 16
 
 
-    12 => 120 
+    12 => 120
 
-    8 -> 16  x 2
+      8 -> 16  x 2
     1000  10000
 
 
-    HW0419(VK) start from here next time.
-    '''
+    logic operation (bitwise operation)
 
-    return 
+    14 & 4 = 4
+    
+     MSB -> LSB
+       1 1 1 0   => 14
+    &  0 1 0 0   => 4
+    ------------
+       0 1 0 0   => 4
+
+     Q: 15, get the last bit
+
+        1 1 1 1
+    &   0 0 0 1
+    ------------
+              1
+
+
+
+                     binary format
+    get last digit     % 2            & 1
+    shift right        // 2          >> 1 
+    shift left         * 2           << 1
+    
+
+    """
+
+    #Q: 128 /2 => 
+    print( 128 >> 2)
+
+
+
+def leetcode_binary_digit_reversed_number():
+    def getBinReverDecimal(x):
+        #HW0420
+
+        return -1 #TBD
+    
+    num = 12 # 1 1 0 0 
+    #Q: reverse the "num" in binary format, and print out the value in decimal format
+    # 1 1 0 0 -> 0 0 1 1 => 3
+
+    print("%d -> %d (ans 3" % (num, getBinReverDecimal(x)))
+    
+    

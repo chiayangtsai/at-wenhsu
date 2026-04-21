@@ -5,7 +5,7 @@ from basics import *
 
 if __name__ == "__main__":
     # special meaning for Python execution, but we will talk about it later.
-    testID =31
+    testID =33
 
     if testID == 0:
         print("hello World")
@@ -55,8 +55,10 @@ if __name__ == "__main__":
         leetcode_two_sum() 
     elif testID == 25:
         leetcode_roman_integer()
-    #.. integer to roman
-    # .. longest sub string 
+    elif testID == 26:
+        leetcode_integer_to_roman()
+    elif testID == 27:
+        leetcode_longest_substring_without_repeating()
     elif testID == 30:
         basic_decimal_digit() #deciaml
     elif testID == 31:
@@ -65,6 +67,8 @@ if __name__ == "__main__":
         leetcode_even_odd_diff()
     elif testID == 33:
         basic_binary_digit() #binary
+    elif testID == 34:
+        leetcode_binary_digit_reversed_number()
     else:
         print("Not a supported testID = %d" % (testID))
 
@@ -74,23 +78,30 @@ if __name__ == "__main__":
 
 
 Part 2/3 - basic algorithms
-- leetcode : integer to roman
-- sliding window iii : longest sub string
-- digit : decimal
-- digit : binary
+- leetcode : integer to roman <== HW
+- sliding window iii : longest sub string <== HW
+- digit : binary <== HW
 
 <-     able to start AI coding  : Cursor/Claude Code  -> light introduction
 
 Part 3/3 - dynamic programming
 - dynamic programming : recursive programming
 - sort()
-....
+- 2D : matrix, image
+- binary tree creation : Breath First (BF)
+- class 
+
+<------- leetcode 150 study plan -----> 3.4 classes
+- easy, medium
+- before "stack" ~20+ 
 
 
-------- leetcode 150 study plan -----
-
-
-------- advanced level -------
+------- advanced level ------- (coding interview)
+- binary tree creation : DF
+- DFS
+- sort : heap sort, quick sort, merge sort
+- linked list + string (string + recursive)
+- union find 
 
 
 """
